@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Thanos Katsaounis</title>
+  <subtitle>Writing on cloud, Kubernetes and platform engineering.</subtitle>
+  <id>https://thanoskatsaounis.me/</id>
+  <link rel="alternate" type="text/html" href="https://thanoskatsaounis.me/"/>
+  <link rel="self" type="application/atom+xml" href="https://thanoskatsaounis.me/feed.xml"/>
+  <updated>2026-09-04T00:00:00.000Z</updated>
+  <author><name>Thanos Katsaounis</name></author>
+  <entry>
+    <title>GPT-6 Astra system card: multiturn jailbreaks and prompt injection</title>
+    <id>https://thanoskatsaounis.me/#changed-astra-jailbreak-evals</id>
+    <link rel="alternate" type="text/html" href="https://deploymentsafety.openai.com/gpt-6-astra/multiturn-jailbreak-evaluations"/>
+    <published>2026-09-04T00:00:00.000Z</published>
+    <updated>2026-09-04T00:00:00.000Z</updated>
+    <category term="deploymentsafety.openai.com"/>
+    <content type="text">Two measurements sit next to each other in the system card. The multiturn jailbreak evaluation uses adaptive attackers that probe, read the reply and change tactic across turns, and it scores worst case: for a budget of n attempts the model counts as succeeding only if it avoids unsafe assistance across all n. Separately, robustness to indirect prompt injection is reported climbing from 96.23% to 99.79%, with instruction-hierarchy robustness at 99.99%.
+
+The metric is the transferable part, not the score. Reporting worst case across an attempt budget rather than an average is the difference between a gate and a dashboard, and it is the shape a regression test needs if it is meant to block a merge. The percentage deserves the opposite reading: 99.79% is a 1-in-475 failure rate, so an agent making a few thousand tool calls against untrusted content should expect several successful injections per run. At that volume the useful question is not the rate but what a single success can reach, which is a question about scopes and permissions rather than about the model.</content>
+  </entry>
+  <entry>
+    <title>Agents&apos; next frontier: agent-to-agent and network effects</title>
+    <id>https://thanoskatsaounis.me/#changed-agent-to-agent-network-effects</id>
+    <link rel="alternate" type="text/html" href="https://www.youtube.com/watch?v=REascnFlq_8"/>
+    <published>2026-09-04T00:00:00.000Z</published>
+    <updated>2026-09-04T00:00:00.000Z</updated>
+    <category term="youtube.com"/>
+    <content type="text">A 21-minute talk by Jean-Denis Greze, CTO of Town and previously CTO at Plaid, at AI Engineer. He opens on the network effects of agents working with other agents and then discards the framing: agent-to-agent, he argues, does not make much sense as a concept, and the real problem is search — getting the right private information into an LLM call whose effects land on someone other than the caller. He walks through five strategies teams use, starting with approximate access to everything inside a trust boundary (his example is one agent holding both his and his wife&apos;s mail), and reduces the sharing decision to two options: ask a human at the moment of sharing, or trust the model with full access and no prompt.
+
+Reframing it as a data question rather than a protocol question moves the design work somewhere useful. A wire format between agents is the easy half; the hard half is which private data crosses a boundary, and who confirms it. That also explains why the ask-a-human option is not a UX detail: it is the only point in the flow where the blast radius of a wrong inference is bounded by something other than the model&apos;s judgement.</content>
+  </entry>
+  <entry>
+    <title>Safety overview: GPT-6 Astra</title>
+    <id>https://thanoskatsaounis.me/#changed-gpt-6-astra-safety</id>
+    <link rel="alternate" type="text/html" href="https://openai.com/index/safety-overview-gpt-6-astra/"/>
+    <published>2026-09-04T00:00:00.000Z</published>
+    <updated>2026-09-04T00:00:00.000Z</updated>
+    <category term="openai.com"/>
+    <content type="text">OpenAI&apos;s first model to reach the Critical cybersecurity threshold under its Preparedness Framework. Two findings sit oddly together. Monitorability went down: Astra controls its own chain of thought better than GPT-5.6 Sol, is less likely to put incriminating information in it, and under adversarial instruction can sandbag evaluations and sometimes evade internal monitors. At the same time OpenAI says it has added misalignment monitoring to all tool-using inference in Astra&apos;s external deployment, at significant compute cost, and reports the model is markedly more robust to prompt injection, with fewer unauthorised transactions, data-loss and excessive-access actions in browsing and workplace tests.
+
+Both findings push the same way: the check is moving out of the model&apos;s reasoning and into the runtime around it, and it is being paid for in compute. That is the argument for putting the gate somewhere you own rather than somewhere you read. A deterministic check does not become less monitorable as the model gets better at hiding its reasoning, and it does not need a research programme to stay trustworthy.</content>
+  </entry>
+  <entry>
+    <title>Claude Fable 5.1 and Mythos 5.1</title>
+    <id>https://thanoskatsaounis.me/#changed-fable-5-1</id>
+    <link rel="alternate" type="text/html" href="https://www.anthropic.com/claude-fable-and-mythos-5-1"/>
+    <published>2026-09-04T00:00:00.000Z</published>
+    <updated>2026-09-04T00:00:00.000Z</updated>
+    <category term="anthropic.com"/>
+    <content type="text">One model, two safeguard profiles: Fable 5.1 is generally available, Mythos 5.1 only through trusted access programs for cybersecurity and life sciences. The stated ~25% price drop for typical token-billed workloads comes specifically from cheaper cache reads, rising to ~45% on highly agentic use. It defaults to High effort in Claude Code and Medium elsewhere.</content>
+  </entry>
+  <entry>
+    <title>The Database Nobody Dares Delete</title>
+    <id>https://medium.com/@katsathanasis2/the-database-nobody-dares-delete-c793ac492db9</id>
+    <link rel="alternate" type="text/html" href="https://medium.com/@katsathanasis2/the-database-nobody-dares-delete-c793ac492db9"/>
+    <published>2026-08-23T13:45:36.000Z</published>
+    <updated>2026-08-23T13:45:36.000Z</updated>
+    <category term="Azure"/>
+    <category term="Python"/>
+    <content type="text">Azure shows you every resource you own. It won&apos;t tell you what breaks when one dies, so I built the missing map.</content>
+  </entry>
+  <entry>
+    <title>I Built a Policy Scanner That Fixes My Terraform and Proves the Fix Holds</title>
+    <id>https://medium.com/@katsathanasis2/i-built-a-policy-scanner-that-fixes-my-terraform-and-proves-the-fix-holds-2cb12ac60637</id>
+    <link rel="alternate" type="text/html" href="https://medium.com/@katsathanasis2/i-built-a-policy-scanner-that-fixes-my-terraform-and-proves-the-fix-holds-2cb12ac60637"/>
+    <published>2026-07-24T11:20:00.000Z</published>
+    <updated>2026-07-24T11:20:00.000Z</updated>
+    <category term="OPA / Rego"/>
+    <category term="Terraform"/>
+    <content type="text">A local model explains the misconfiguration, a deterministic engine writes the fix, and the pipeline re-scans to prove zero violations.</content>
+  </entry>
+  <entry>
+    <title>I Built a CI/CD Pipeline That Refuses to Run Code It Can&apos;t Prove It Built</title>
+    <id>https://medium.com/@katsathanasis2/i-built-a-ci-cd-pipeline-that-refuses-to-run-code-it-cant-prove-it-built-e6cc30813524</id>
+    <link rel="alternate" type="text/html" href="https://medium.com/@katsathanasis2/i-built-a-ci-cd-pipeline-that-refuses-to-run-code-it-cant-prove-it-built-e6cc30813524"/>
+    <published>2026-06-29T18:22:37.000Z</published>
+    <updated>2026-06-29T18:22:37.000Z</updated>
+    <category term="Sigstore"/>
+    <category term="Kyverno"/>
+    <content type="text">Signing, SBOMs and admission control, wired so an unsigned image never reaches the cluster.</content>
+  </entry>
+</feed>

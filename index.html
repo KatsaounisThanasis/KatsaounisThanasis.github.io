@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#050505" />
+
+    <!--
+      Everything below is deliberately STATIC. This is a single-page app, so the
+      crawlers that build a link preview (LinkedIn, Slack, X, Google) read this
+      file and never run the JavaScript that fills #root. Anything set from React
+      is invisible to them.
+
+      The domain is thanoskatsaounis.me, registered 2026-08-24. It appears in
+      six places here and in public/robots.txt and public/sitemap.xml; change
+      all of them together. og:image must be an absolute URL, because relative
+      paths are silently ignored by every scraper that reads it.
+    -->
+    <title>Thanos Katsaounis — DevOps &amp; Cloud Engineer</title>
+    <meta
+      name="description"
+      content="DevOps &amp; Cloud engineer. I build software and the infrastructure that runs it across Azure, GCP, and Kubernetes: cloud engineering, DevOps, platform engineering and software development, from Kubernetes and CI/CD to internal tooling and open-source projects."
+    />
+    <link rel="canonical" href="https://thanoskatsaounis.me/" />
+
+    <!-- Open Graph: LinkedIn, Slack, Facebook, most chat apps -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Thanos Katsaounis" />
+    <meta property="og:title" content="Thanos Katsaounis — DevOps &amp; Cloud Engineer" />
+    <meta
+      property="og:description"
+      content="I build software and the infrastructure that runs it across Azure, GCP, and Kubernetes. Cloud engineering, DevOps, platform engineering and software development, from Kubernetes and CI/CD to internal tooling and open-source projects."
+    />
+    <meta property="og:url" content="https://thanoskatsaounis.me/" />
+    <meta property="og:image" content="https://thanoskatsaounis.me/og.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="DevOps and Cloud Engineer — software and the infrastructure that runs it, across Azure, GCP and Kubernetes" />
+    <meta property="og:locale" content="en_GB" />
+    <meta property="og:locale:alternate" content="el_GR" />
+
+    <!-- X / Twitter reads its own namespace and falls back to og: for the rest -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Thanos Katsaounis — DevOps &amp; Cloud Engineer" />
+    <meta
+      name="twitter:description"
+      content="I build software and the infrastructure that runs it across Azure, GCP, and Kubernetes. Cloud engineering, DevOps, platform engineering and software development, from Kubernetes and CI/CD to internal tooling and open-source projects."
+    />
+    <meta name="twitter:image" content="https://thanoskatsaounis.me/og.png" />
+
+    <!-- Structured data. Google uses this for the knowledge panel and to tie the
+         site to the profiles below, which is why sameAs is worth filling in. -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Thanos Katsaounis",
+        "jobTitle": "DevOps & Cloud Engineer",
+        "url": "https://thanoskatsaounis.me/",
+        "image": "https://thanoskatsaounis.me/og.png",
+        "sameAs": [
+          "https://github.com/KatsaounisThanasis",
+          "https://www.linkedin.com/in/thanos-katsaounis/",
+          "https://medium.com/@katsathanasis2"
+        ],
+        "knowsAbout": [
+          "Microsoft Azure",
+          "Google Cloud Platform",
+          "Kubernetes",
+          "Terraform",
+          "Platform Engineering",
+          "Policy as Code",
+          "Supply Chain Security"
+        ]
+      }
+    </script>
+
+    <!-- Declared so readers and browser extensions discover it without being
+         told the URL. Generated at build time by tools/gen-feed.mjs. -->
+    <link
+      rel="alternate"
+      type="application/atom+xml"
+      title="Thanos Katsaounis — writing"
+      href="/feed.xml"
+    />
+
+    <link rel="icon" href="/favicon.svg" />
+    <!-- Preload primary display weights (bold 700 and black 900) to eliminate layout shift -->
+    <link rel="preload" href="/fonts/cabinet-grotesk-700.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/cabinet-grotesk-900.woff2" as="font" type="font/woff2" crossorigin />
+    <script type="module" crossorigin src="/assets/index-BmKG5b5d.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-CPdPcvWI.css">
+  </head>
+  <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root"></div>
+  </body>
+</html>
