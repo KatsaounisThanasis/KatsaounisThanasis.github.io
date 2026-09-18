@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Thanos Katsaounis</title>
+  <subtitle>Writing on cloud, Kubernetes and platform engineering.</subtitle>
+  <id>https://thanoskatsaounis.me/</id>
+  <link rel="alternate" type="text/html" href="https://thanoskatsaounis.me/"/>
+  <link rel="self" type="application/atom+xml" href="https://thanoskatsaounis.me/feed.xml"/>
+  <updated>2026-09-18T00:00:00.000Z</updated>
+  <author><name>Thanos Katsaounis</name></author>
+  <entry>
+    <title>The unreasonable effectiveness of BM25 for agentic search — Jo Kristian Bergum, Hornet.dev</title>
+    <id>https://thanoskatsaounis.me/#changed-bm25-agentic-search</id>
+    <link rel="alternate" type="text/html" href="https://www.youtube.com/watch?v=fZH97QHHYjY"/>
+    <published>2026-09-18T00:00:00.000Z</published>
+    <updated>2026-09-18T00:00:00.000Z</updated>
+    <category term="youtube.com"/>
+    <content type="text">An 18-minute talk by Jo Kristian Bergum, CEO of Hornet.dev, at AI Engineer. BM25 is a roughly 30-year-old lexical scoring function, named Best Match 25 because the twenty-fifth experiment was the one that worked, and his argument is that it has not changed at all — the user has. A model knows entities, companies, dates, postal codes and SKUs, writes far longer and more specific queries than the two or three terms in a human query log, and uses the syntax operators it picked up from web search. The measurement he builds on is BrowseComp-Plus: around 830 riddle-style deep-research questions over a corpus of roughly 100,000 web documents, scored on whether the whole loop returns the gold answer. Stuffing the evidence documents straight into the context scores high, even on GPT-4, so reasoning is not the bottleneck; hand the same model a search tool instead and accuracy falls, because it now rests on the harness, the model&apos;s query formulation and the retriever. He also flags that the BM25 baseline in that paper ran with parameters unsuited to long documents — BM25 has two hyperparameters — which is much of why neural retrieval looked so far ahead of it.
+
+The two numbers on the same questions are the instrument here, not the ranking. If evidence placed in the context answers a question and a search tool in front of the same model does not, the deficit is in the harness, and that gap can be measured locally without retraining anything or swapping models — it is the part of an agent&apos;s retrieval a team actually owns. The baseline finding points the other way and is worth carrying into any comparison read off a paper: a published win over BM25 is only as strong as that paper&apos;s BM25 configuration, so embeddings beating lexical search can mean embeddings beating a misconfigured lexical baseline. Cheap to check, given the configuration is two numbers.</content>
+  </entry>
+  <entry>
+    <title>Introducing System One Models &amp; Jev</title>
+    <id>https://thanoskatsaounis.me/#changed-system-one-models-jev</id>
+    <link rel="alternate" type="text/html" href="https://typesafe.ai/blog/introducing-system-one-models-and-jev"/>
+    <published>2026-09-18T00:00:00.000Z</published>
+    <updated>2026-09-18T00:00:00.000Z</updated>
+    <category term="typesafe.ai"/>
+    <content type="text">TypeSafe&apos;s first System One model, in early access behind a waitlist since 15 September. It gives up string generation: the possible outputs and their structure are fixed in the schema before the call, all outputs come back from a single parallel query rather than token by token, and every answer carries a calibrated probability. Input is $0.042 per million tokens with output unmetered, against $0.20-$10 per million input for frontier LLMs, and end-to-end latency is 70-500ms against 3-329 seconds. The evidence section is unusually explicit about its own limits. The workflow evaluation was written by TypeSafe&apos;s own model capabilities team; the reference answers are the average of GPT-6 Astra&apos;s and Fable 5.1&apos;s predictions rather than a ground truth; the comparison figures for LLMs come from OpenRouter, where harder queries may have been routed to better models; and the 0% type-error rate in the charts is, in TypeSafe&apos;s own words, not empirical — it is entered from the schema guarantee rather than measured.
+
+Scoring against the averaged predictions of two frontier models measures agreement with them rather than correctness, which leaves the accuracy column and the price column making claims of different kinds: one is verifiable this afternoon, the other is parity with two models that were themselves never marked. TypeSafe says so, and adds that the choice probably understates its own result. What survives the caveats is the part that changes code rather than an invoice — a bounded set of questions answered in one pass, each with a number you can put a threshold on. That turns routing or triage into an if-statement with a confidence floor, where the usual version is a prompt asking a model to please return JSON and a try/catch for when it does not.</content>
+  </entry>
+  <entry>
+    <title>Introducing the Life Sciences Verification Program</title>
+    <id>https://thanoskatsaounis.me/#changed-life-sciences-verification-program</id>
+    <link rel="alternate" type="text/html" href="https://www.anthropic.com/news/life-sciences-verification-program"/>
+    <published>2026-09-18T00:00:00.000Z</published>
+    <updated>2026-09-18T00:00:00.000Z</updated>
+    <category term="anthropic.com"/>
+    <content type="text">Verified life-science teams get access to Mythos, Opus and Sonnet with classifiers more permissive for biology. Two grant types: Standard Use covers an entire team and renews once a year; High-risk Use is per research project, renews every six months, and removes all safeguards that block life-sciences requests. The mechanism is the notable part. Anthropic is shifting these safeguards from real-time blocking at each request to offline monitoring of patterns across requests and sessions, on the reasoning that serious misuse is spread out precisely so the pieces look disconnected — which in turn requires retaining flagged traffic for 30 days. Access is tied to the use cases the organisation declares in its own application; Anthropic monitors traffic against that stated scope and flags anything outside it to the organisation&apos;s admins, who triage within pre-agreed timeframes. Three threat models are named: access compromise, insider threats, and agent misuse, described as agents, especially working in swarms or over long-horizon tasks, taking unintended dangerous actions.
+
+The trade is the one every team makes the moment an agent touches real systems, put more plainly here than usual: a check at each request cannot see a campaign assembled across sessions, so the gate moves from synchronous refusal to asynchronous detection, and the cost arrives as retained logs plus a person who owns the triage. The division of labour is the transferable half. Blocking is a control a provider can sell; deciding what counts as out of scope, and answering when something is, stays with the customer. A platform offering only the first half has left out the part that needs a name attached to it.</content>
+  </entry>
+  <entry>
+    <title>Detecting and countering misuse of AI: September 2026</title>
+    <id>https://thanoskatsaounis.me/#changed-anthropic-threat-report-sept-2026</id>
+    <link rel="alternate" type="text/html" href="https://www.anthropic.com/threat-intelligence-report-september-2026"/>
+    <published>2026-09-11T00:00:00.000Z</published>
+    <updated>2026-09-11T00:00:00.000Z</updated>
+    <category term="anthropic.com"/>
+    <content type="text">Eight months of disrupted misuse, December 2025 to August 2026, across seven harm areas. Haiku, Sonnet and Opus were the models involved; no case touched Fable or Mythos except one distillation attempt. The shift the report names is from assistance to orchestration: multi-agent frameworks running reconnaissance, exploitation and exfiltration, with the human choosing targets and reviewing what came back. One espionage actor&apos;s agents watched whether their malware had been detected and rebuilt it until it was not, and the operator&apos;s main manual task was editing the Claude Code skills that drove the workflow. Separately, multiple actors compromised AI wrapper services&apos; LiteLLM deployments, using prompt injection to exfiltrate the production API keys held in their cloud container environments. The report concludes that AI has inverted the cost back onto defenders, and that sophistication has stopped being a reliable signal of who is behind an operation.
+
+The LiteLLM cases are the ones worth sitting with, because they are not about agents as weapons: they are the agent plumbing as the target. A model gateway is a service that holds production keys for several providers and whose whole purpose is to pass untrusted text to a model, which makes prompt injection an access path to a credential store rather than a content problem. Anyone running a proxy to compare models is running that surface. The detection finding points the same way from the other end: a signature pipeline releases on a human cadence and is now racing an automated rebuild loop, so a control that depends on recognising a known artifact has lost the economics it relied on, while one that bounds what a compromised component can reach has not.</content>
+  </entry>
+  <entry>
+    <title>GPT-6 Astra vs Claude Fable 5.1: Release Comparison</title>
+    <id>https://thanoskatsaounis.me/#changed-astra-vs-fable-cost-per-task</id>
+    <link rel="alternate" type="text/html" href="https://artificialanalysis.ai/models/releases/comparisons/gpt-6-astra-vs-claude-fable-5-1"/>
+    <published>2026-09-11T00:00:00.000Z</published>
+    <updated>2026-09-11T00:00:00.000Z</updated>
+    <category term="artificialanalysis.ai"/>
+    <content type="text">At their top settings the two tie at 53 on the Intelligence Index v4.3, and both families offer a 1M context window. Fable 5.1 at max effort emits 67 tokens/second against 54 for Astra max. At low effort, Astra costs $0.82 per index task for a score of 46, and Fable $2.37 for a score of 47. Blended price per million tokens runs the other way: $7.2 for Fable against $7.7 for Astra. Cost per task is computed from input, cache-hit, cache-write, reasoning and answer token prices.
+
+Cheaper per token and roughly three times the price per task is only a contradiction until you notice which number the model controls. The price list is fixed; the token count is not, and at low effort one of these spends far more of them to arrive at the same score. So the bill is set by the effort setting, not by the rate card, which is the same conclusion the earlier Fable 5.1 pricing entry arrived at from cache reads and per-client effort defaults. It also means a cost comparison assembled from pricing pages can rank two models backwards, and that the unit worth measuring is a task trace from your own workload.</content>
+  </entry>
+  <entry>
+    <title>Now everyone can put data to work</title>
+    <id>https://thanoskatsaounis.me/#changed-openai-data-agent</id>
+    <link rel="alternate" type="text/html" href="https://openai.com/index/put-data-to-work/"/>
+    <published>2026-09-11T00:00:00.000Z</published>
+    <updated>2026-09-11T00:00:00.000Z</updated>
+    <category term="openai.com"/>
+    <content type="text">The Data agent in ChatGPT Work, announced 10 September 2026. It connects to Redshift, Datadog, BigQuery, ClickHouse, Databricks, MongoDB and Snowflake, and pulls files from Drive and SharePoint. It reads the organisation&apos;s own metric definitions and data relationships from semantic layers: dbt, Databricks Genie Ontology, Snowflake Horizon and existing BI dashboards. Administrators choose which connections exist and which roles may use them, and queries enforce the connected account&apos;s existing permissions down to table, row and column. It builds and edits dashboards in Power BI, Tableau, Sigma, ThoughtSpot, Omni and Oracle BI, and can send findings to Slack or email. OpenAI says nearly all of its product organisation and over two-thirds of its go-to-market organisation use it internally, which its data team enabled by creating shared business definitions, setting access rules and adding safeguards for sensitive data.
+
+Read the connector list and the internal-adoption paragraph together and the announcement is describing a prerequisite, not a shortcut. The agent reads dbt and Genie Ontology rather than raw tables, and the reason given for it working inside OpenAI is a list of data-governance groundwork. That promotes the semantic layer from documentation, which is how most organisations treat it, to an execution dependency: without governed definitions the thing guesses at what revenue means, in conversation, at speed. Inheriting the account&apos;s row and column grants has the same shape. It is a good design, and it makes the agent exactly as constrained as a warehouse permission model that was mostly written for analysts who ask one question a week.</content>
+  </entry>
+  <entry>
+    <title>GPT-6 Astra system card: multiturn jailbreaks and prompt injection</title>
+    <id>https://thanoskatsaounis.me/#changed-astra-jailbreak-evals</id>
+    <link rel="alternate" type="text/html" href="https://deploymentsafety.openai.com/gpt-6-astra/multiturn-jailbreak-evaluations"/>
+    <published>2026-09-04T00:00:00.000Z</published>
+    <updated>2026-09-04T00:00:00.000Z</updated>
+    <category term="deploymentsafety.openai.com"/>
+    <content type="text">Two measurements sit next to each other in the system card. The multiturn jailbreak evaluation uses adaptive attackers that probe, read the reply and change tactic across turns, and it scores worst case: for a budget of n attempts the model counts as succeeding only if it avoids unsafe assistance across all n. Separately, robustness to indirect prompt injection is reported climbing from 96.23% to 99.79%, with instruction-hierarchy robustness at 99.99%.
+
+The metric is the transferable part, not the score. Reporting worst case across an attempt budget rather than an average is the difference between a gate and a dashboard, and it is the shape a regression test needs if it is meant to block a merge. The percentage deserves the opposite reading: 99.79% is a 1-in-475 failure rate, so an agent making a few thousand tool calls against untrusted content should expect several successful injections per run. At that volume the useful question is not the rate but what a single success can reach, which is a question about scopes and permissions rather than about the model.</content>
+  </entry>
+  <entry>
+    <title>Agents&apos; next frontier: agent-to-agent and network effects</title>
+    <id>https://thanoskatsaounis.me/#changed-agent-to-agent-network-effects</id>
+    <link rel="alternate" type="text/html" href="https://www.youtube.com/watch?v=REascnFlq_8"/>
+    <published>2026-09-04T00:00:00.000Z</published>
+    <updated>2026-09-04T00:00:00.000Z</updated>
+    <category term="youtube.com"/>
+    <content type="text">A 21-minute talk by Jean-Denis Greze, CTO of Town and previously CTO at Plaid, at AI Engineer. He opens on the network effects of agents working with other agents and then discards the framing: agent-to-agent, he argues, does not make much sense as a concept, and the real problem is search — getting the right private information into an LLM call whose effects land on someone other than the caller. He walks through five strategies teams use, starting with approximate access to everything inside a trust boundary (his example is one agent holding both his and his wife&apos;s mail), and reduces the sharing decision to two options: ask a human at the moment of sharing, or trust the model with full access and no prompt.
+
+Reframing it as a data question rather than a protocol question moves the design work somewhere useful. A wire format between agents is the easy half; the hard half is which private data crosses a boundary, and who confirms it. That also explains why the ask-a-human option is not a UX detail: it is the only point in the flow where the blast radius of a wrong inference is bounded by something other than the model&apos;s judgement.</content>
+  </entry>
+  <entry>
+    <title>Safety overview: GPT-6 Astra</title>
+    <id>https://thanoskatsaounis.me/#changed-gpt-6-astra-safety</id>
+    <link rel="alternate" type="text/html" href="https://openai.com/index/safety-overview-gpt-6-astra/"/>
+    <published>2026-09-04T00:00:00.000Z</published>
+    <updated>2026-09-04T00:00:00.000Z</updated>
+    <category term="openai.com"/>
+    <content type="text">OpenAI&apos;s first model to reach the Critical cybersecurity threshold under its Preparedness Framework. Two findings sit oddly together. Monitorability went down: Astra controls its own chain of thought better than GPT-5.6 Sol, is less likely to put incriminating information in it, and under adversarial instruction can sandbag evaluations and sometimes evade internal monitors. At the same time OpenAI says it has added misalignment monitoring to all tool-using inference in Astra&apos;s external deployment, at significant compute cost, and reports the model is markedly more robust to prompt injection, with fewer unauthorised transactions, data-loss and excessive-access actions in browsing and workplace tests.
+
+Both findings push the same way: the check is moving out of the model&apos;s reasoning and into the runtime around it, and it is being paid for in compute. That is the argument for putting the gate somewhere you own rather than somewhere you read. A deterministic check does not become less monitorable as the model gets better at hiding its reasoning, and it does not need a research programme to stay trustworthy.</content>
+  </entry>
+  <entry>
+    <title>Claude Fable 5.1 and Mythos 5.1</title>
+    <id>https://thanoskatsaounis.me/#changed-fable-5-1</id>
+    <link rel="alternate" type="text/html" href="https://www.anthropic.com/claude-fable-and-mythos-5-1"/>
+    <published>2026-09-04T00:00:00.000Z</published>
+    <updated>2026-09-04T00:00:00.000Z</updated>
+    <category term="anthropic.com"/>
+    <content type="text">One model, two safeguard profiles: Fable 5.1 is generally available, Mythos 5.1 only through trusted access programs for cybersecurity and life sciences. The stated ~25% price drop for typical token-billed workloads comes specifically from cheaper cache reads, rising to ~45% on highly agentic use. It defaults to High effort in Claude Code and Medium elsewhere.
+
+Both headline numbers describe the caller more than the model. A discount on cache reads only reaches a workload that re-sends a stable prefix, which is why the figure climbs on agentic use: a loop resending a large fixed context every turn is exactly the shape that hits cache. Anything that varies the top of the prompt per call — an injected timestamp, a reordered context block, a preamble assembled fresh each time — forfeits it, which makes the saving something to reach by editing code rather than by comparing list prices. The effort default splits the same way: one model version answers at High through Claude Code and Medium everywhere else, so an evaluation that does not pin effort is not measuring the configuration anyone is running.</content>
+  </entry>
+  <entry>
+    <title>The Database Nobody Dares Delete</title>
+    <id>https://medium.com/@katsathanasis2/the-database-nobody-dares-delete-c793ac492db9</id>
+    <link rel="alternate" type="text/html" href="https://medium.com/@katsathanasis2/the-database-nobody-dares-delete-c793ac492db9"/>
+    <published>2026-08-23T13:45:36.000Z</published>
+    <updated>2026-08-23T13:45:36.000Z</updated>
+    <category term="Azure"/>
+    <category term="Python"/>
+    <content type="text">Azure shows you every resource you own. It won&apos;t tell you what breaks when one dies, so I built the missing map.</content>
+  </entry>
+  <entry>
+    <title>I Built a Policy Scanner That Fixes My Terraform and Proves the Fix Holds</title>
+    <id>https://medium.com/@katsathanasis2/i-built-a-policy-scanner-that-fixes-my-terraform-and-proves-the-fix-holds-2cb12ac60637</id>
+    <link rel="alternate" type="text/html" href="https://medium.com/@katsathanasis2/i-built-a-policy-scanner-that-fixes-my-terraform-and-proves-the-fix-holds-2cb12ac60637"/>
+    <published>2026-07-24T11:20:00.000Z</published>
+    <updated>2026-07-24T11:20:00.000Z</updated>
+    <category term="OPA / Rego"/>
+    <category term="Terraform"/>
+    <content type="text">A local model explains the misconfiguration, a deterministic engine writes the fix, and the pipeline re-scans to prove zero violations.</content>
+  </entry>
+  <entry>
+    <title>I Built a CI/CD Pipeline That Refuses to Run Code It Can&apos;t Prove It Built</title>
+    <id>https://medium.com/@katsathanasis2/i-built-a-ci-cd-pipeline-that-refuses-to-run-code-it-cant-prove-it-built-e6cc30813524</id>
+    <link rel="alternate" type="text/html" href="https://medium.com/@katsathanasis2/i-built-a-ci-cd-pipeline-that-refuses-to-run-code-it-cant-prove-it-built-e6cc30813524"/>
+    <published>2026-06-29T18:22:37.000Z</published>
+    <updated>2026-06-29T18:22:37.000Z</updated>
+    <category term="Sigstore"/>
+    <category term="Kyverno"/>
+    <content type="text">Signing, SBOMs and admission control, wired so an unsigned image never reaches the cluster.</content>
+  </entry>
+</feed>

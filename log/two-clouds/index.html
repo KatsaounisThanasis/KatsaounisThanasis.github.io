@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#050505" />
+
+    <!--
+      TEMPLATE. Every page's HTML is generated from this file by
+      tools/gen-pages.mjs, one per entry in src/routes.js, including the root
+      index.html. Do not edit a generated file: it is gitignored and the next
+      build overwrites it.
+
+      Everything below is deliberately STATIC. The pages are React, so the
+      crawlers that build a link preview (LinkedIn, Slack, X, Google) read this
+      HTML and never run the JavaScript that fills #root. Anything set from
+      React is invisible to them. That is the whole reason the site is many
+      real files rather than one file behind a router: a router would give
+      every URL this same head, and per-URL metadata is the point.
+
+      The domain is thanoskatsaounis.me, registered 2026-08-24. It appears here
+      and in public/robots.txt, and public/sitemap.xml is generated from the
+      same routes; change them together.
+
+      og:image must be an absolute URL, because relative paths are silently
+      ignored by every scraper that reads it.
+    -->
+    <title>The Pragmatic Case for Two Clouds (And Why Nobody Needs Portability) — Thanos Katsaounis</title>
+    <meta name="description" content="Slide decks sell cloud portability as insurance against vendor lock-in. In production, workloads never move. The real win is specialization without leaky abstractions." />
+    <link rel="canonical" href="https://thanoskatsaounis.me/log/two-clouds/" />
+
+    <!-- Open Graph: LinkedIn, Slack, Facebook, most chat apps -->
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="Thanos Katsaounis" />
+    <meta property="og:title" content="The Pragmatic Case for Two Clouds (And Why Nobody Needs Portability) — Thanos Katsaounis" />
+    <meta property="og:description" content="Slide decks sell cloud portability as insurance against vendor lock-in. In production, workloads never move. The real win is specialization without leaky abstractions." />
+    <meta property="og:url" content="https://thanoskatsaounis.me/log/two-clouds/" />
+    <meta property="og:image" content="https://thanoskatsaounis.me/og.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="DevOps and Cloud Engineer — software and the infrastructure that runs it, across Azure, GCP and Kubernetes" />
+    <meta property="og:locale" content="en_GB" />
+    <meta property="og:locale:alternate" content="el_GR" />
+
+    <!-- X / Twitter reads its own namespace and falls back to og: for the rest -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="The Pragmatic Case for Two Clouds (And Why Nobody Needs Portability) — Thanos Katsaounis" />
+    <meta name="twitter:description" content="Slide decks sell cloud portability as insurance against vendor lock-in. In production, workloads never move. The real win is specialization without leaky abstractions." />
+    <meta name="twitter:image" content="https://thanoskatsaounis.me/og.png" />
+
+    <!-- Declared so readers and browser extensions discover it without being
+         told the URL. Generated at build time by tools/gen-feed.mjs. -->
+    <link
+      rel="alternate"
+      type="application/atom+xml"
+      title="Thanos Katsaounis — writing"
+      href="/feed.xml"
+    />
+
+    <link rel="icon" href="/favicon.svg" />
+    <!--
+      Preload the weights that are actually above the fold, which is not the
+      same as the weights that look most important. Measured on the home page
+      at a 900px viewport: only 400 and 900 render in the first screen — 900 is
+      the hero headline and so the LCP element, 400 is the body text under it.
+      700 first appears at y=1323, a screen and a half down, and on /signals/
+      and /builds/ it is never used at all; Chrome said so on every load
+      ("preloaded ... but not used"). Preloading it cost a font fetch on every
+      route and competed with the two that were needed, while 400 — needed on
+      every route, every time — was left to be discovered from the CSS.
+
+      700 is not gone, only unhinted: the @font-face for it still stands and
+      the browser fetches it when something on the page needs it.
+    -->
+    <link rel="preload" href="/fonts/cabinet-grotesk-400.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/cabinet-grotesk-900.woff2" as="font" type="font/woff2" crossorigin />
+    <script type="module" crossorigin src="/assets/index-DWlK6CdW.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-eZqKV_0e.css">
+  </head>
+  <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root" data-page="essay" data-id="twoclouds"></div>
+  </body>
+</html>
