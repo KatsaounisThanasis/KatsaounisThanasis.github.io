@@ -1,0 +1,49 @@
+# Thanos Katsaounis
+
+> DevOps and cloud engineer in Athens. I build software and the infrastructure that runs it across Azure, GCP and Kubernetes. Personal site: essays, projects, and a short log of developments in the field with a judgement attached to each.
+
+Every page here is a real file with its own metadata, but the body is rendered by JavaScript. If you cannot execute scripts, read https://thanoskatsaounis.me/feed.xml: an Atom feed carrying the full text of every article and every dated log entry, regenerated from the same source as the pages on every build. https://thanoskatsaounis.me/sitemap.xml lists all 9 URLs.
+
+## Pages
+
+- [/](https://thanoskatsaounis.me/): DevOps & Cloud engineer. I build software and the infrastructure that runs it: Azure, GCP, Kubernetes and CI/CD, internal tooling, and open-source projects.
+- [/builds/](https://thanoskatsaounis.me/builds/): Open-source projects: Azure blast-radius mapping, multi-cloud provisioning, supply-chain signing and admission control, OPA policy remediation, and reliability gates for agent systems.
+- [/log/](https://thanoskatsaounis.me/log/): An engineering log: essays on cloud architecture and AI in operations, alongside shorter entries on developments worth knowing, each read from its primary source with a judgement attached.
+- [/signals/](https://thanoskatsaounis.me/signals/): Unfiltered Hacker News, dev.to and GitHub activity across Kubernetes, cloud, Terraform, SRE and AI. The raw pool the log is weighed out of.
+
+## Essays on this site
+
+Full text, one page each. There is no date on these by design, and for the same reason they are absent from the feed.
+
+- [The Pragmatic Case for Two Clouds (And Why Nobody Needs Portability)](https://thanoskatsaounis.me/log/two-clouds/): Slide decks sell portability as insurance against vendor lock-in. In production, workloads never move. The win is specialization, without a leaky abstraction on top.
+- [The Model Can Propose, The Code Decides: Practical AI in Cloud Ops](https://thanoskatsaounis.me/log/model-proposes-code-decides/): Language models are good at explaining errors and suggesting fixes, and letting them touch production directly is reckless. Every suggestion ends at a deterministic gate.
+
+## Articles published elsewhere
+
+- [The Database Nobody Dares Delete](https://medium.com/@katsathanasis2/the-database-nobody-dares-delete-c793ac492db9): Azure shows you every resource you own. It won't tell you what breaks when one dies, so I built the missing map.
+- [I Built a Policy Scanner That Fixes My Terraform and Proves the Fix Holds](https://medium.com/@katsathanasis2/i-built-a-policy-scanner-that-fixes-my-terraform-and-proves-the-fix-holds-2cb12ac60637): A local model explains the misconfiguration, a deterministic engine writes the fix, and the pipeline re-scans to prove zero violations.
+- [I Built a CI/CD Pipeline That Refuses to Run Code It Can't Prove It Built](https://medium.com/@katsathanasis2/i-built-a-ci-cd-pipeline-that-refuses-to-run-code-it-cant-prove-it-built-e6cc30813524): Signing, SBOMs and admission control, wired so an unsigned image never reaches the cluster.
+
+## Projects
+
+Open source, all of it on GitHub. These three have a technical breakdown on the site as well as a repository, and the page carries more than the README:
+
+- [MULTI-CLOUD HUB](https://thanoskatsaounis.me/builds/multi-cloud-hub/): Deploy and manage infrastructure across Azure and GCP from one portal. Code at https://github.com/KatsaounisThanasis/Multi-Cloud-Hub
+- [LLM RELIABILITY LAB](https://thanoskatsaounis.me/builds/llm-reliability-lab/): A CLI and CI evaluation harness that gates LLM regressions. Code at https://github.com/KatsaounisThanasis/llm-reliability-lab
+- [ARM PORTAL](https://thanoskatsaounis.me/builds/arm-portal/): Self-service deployment and real-time tracking for Azure ARM and Bicep templates. Code at https://github.com/KatsaounisThanasis/Azure-Resource-Manager-Portal
+
+The others are written up in the articles above. The full list, always current:
+
+- [GitHub profile](https://github.com/KatsaounisThanasis): every repository, including the ones with no write-up.
+
+## Shorter entries in the log
+
+14 entries, most recently 2026-09-25. Each one links a primary source, states what that source reports, and adds an analysis of it where there is one worth adding. They share https://thanoskatsaounis.me/log/ with the essays above: an essay and a short entry with a judgement attached are the same record at two sizes. No cadence is promised and none should be inferred.
+
+- [Atom feed](https://thanoskatsaounis.me/feed.xml): the entries in full, machine-readable.
+- [The log](https://thanoskatsaounis.me/log/): rendered in two parts — the writing, then the dated entries newest first.
+
+## Elsewhere
+
+- [Medium](https://medium.com/@katsathanasis2): where the longer articles are published.
+- [LinkedIn](https://www.linkedin.com/in/thanos-katsaounis/): professional profile.
