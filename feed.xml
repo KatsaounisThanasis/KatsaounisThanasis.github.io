@@ -1,0 +1,384 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Thanos Katsaounis</title>
+  <subtitle>Writing on cloud, Kubernetes and platform engineering.</subtitle>
+  <id>https://thanoskatsaounis.me/</id>
+  <link rel="alternate" type="text/html" href="https://thanoskatsaounis.me/"/>
+  <link rel="self" type="application/atom+xml" href="https://thanoskatsaounis.me/feed.xml"/>
+  <updated>2026-10-23T00:00:00.000Z</updated>
+  <author><name>Thanos Katsaounis</name></author>
+  <entry>
+    <title>Today&apos;s PHP Security Release, and How We&apos;re Strengthening PHP Security</title>
+    <id>https://thanoskatsaounis.me/#changed-php-oom-stale-state-rce-release</id>
+    <link rel="alternate" type="text/html" href="https://thephp.foundation/blog/2026/10/21/todays-php-security-release-and-how-were-strengthening-php-security/"/>
+    <published>2026-10-23T00:00:00.000Z</published>
+    <updated>2026-10-23T00:00:00.000Z</updated>
+    <category term="thephp.foundation"/>
+    <content type="text">Published on 21 October by the PHP Foundation. PHP 8.5.12, 8.4.27, 8.3.36 and 8.2.35 fix two critical remote code execution vulnerabilities. In CVE-2026-109618, a request that reaches memory_limit at the wrong moment can leave partially initialised internal data that PHP later treats as valid. On Apache with mod_php an unauthenticated request triggers it before any application code runs, and full remote code execution was demonstrated with default settings; on PHP-FPM it was confirmed through application-level code paths. In CVE-2026-109619, a fatal error at the wrong point can leave internal state pointing at memory from a previous request, which a later request on the same worker then uses; a use-after-free was confirmed, and the reporter demonstrated remote code execution against a real-world application on Apache with mod_php. The score is CVSS 9.2, not the 10.0 that circulated with the leaked CVE IDs. The out-of-memory root cause was first spotted in 2024, while fixing an issue from Quarkslab&apos;s external audit, but with no known path to code execution the competing fixes stalled for months, a delay the Foundation calls a structural failure. Calif reported an unconditional remote code execution with the same root cause on 11 August, and OpenAI and Wiz reported further vectors. After the CVE IDs leaked on 20 October, the release moved forward a day to 21 October at 14:00 UTC, and Chainguard published images with the fix more than six hours before it. The security team has published 15 CVEs since 1 July and worked through more than 100 reports that were invalid, duplicates or not reproducible.
+
+The two bugs are not equally urgent across a fleet. On Apache with mod_php the memory-limit bug is reachable by an unauthenticated request before any application code runs, with default settings, while the code execution confirmed on PHP-FPM goes through application code. That puts images running mod_php first in the rebuild order, though not alone in it. It also makes the inventory the hard part: mod_php can arrive in a base image or a vendor appliance without anyone having chosen it, so the question is what each image actually loads, not what the team meant to deploy.</content>
+  </entry>
+  <entry>
+    <title>OpenAI models are coming to Google Cloud</title>
+    <id>https://thanoskatsaounis.me/#changed-openai-models-google-cloud</id>
+    <link rel="alternate" type="text/html" href="https://openai.com/index/openai-models-google-cloud"/>
+    <published>2026-10-23T00:00:00.000Z</published>
+    <updated>2026-10-23T00:00:00.000Z</updated>
+    <category term="openai.com"/>
+    <content type="text">Announced on 21 October. OpenAI&apos;s frontier models and Codex agentic workflows are coming to Google Cloud&apos;s Model Garden, bought through Google Cloud Marketplace, and enterprises with Google Cloud spend commitments can draw those commitments down for the purchases. OpenAI models will also come to Google Antigravity and the Gemini Agent. The announcement pairs the models with Google Cloud&apos;s built-in access controls and centralised data governance, and plans general availability in the coming weeks, with access by request until then. It names no models, regions, prices or data-handling terms. It closes with one line: Microsoft remains OpenAI&apos;s primary cloud partner.
+
+The commitment drawdown is the operative part. A model sold through a cloud&apos;s marketplace is paid for out of money already committed to that cloud, so the choice of model starts to follow the cloud contract instead of the other way round. For a team on both Azure and Google Cloud, the same model family may soon sit behind two sets of access controls, quotas and logs, and which one a workload uses becomes a governance decision rather than a technical one.</content>
+  </entry>
+  <entry>
+    <title>Introducing Claude Duet</title>
+    <id>https://thanoskatsaounis.me/#changed-claude-duet-research-preview</id>
+    <link rel="alternate" type="text/html" href="https://claude.com/resources/articles/claude-duet"/>
+    <published>2026-10-23T00:00:00.000Z</published>
+    <updated>2026-10-23T00:00:00.000Z</updated>
+    <category term="claude.com"/>
+    <content type="text">A research preview by waitlist, starting with US Pro and Max subscribers, as a standalone iOS and Android app and on claude.ai. Claude Duet is a proactive agent built around Claude Opus 5.5. It sends a morning brief on the connected apps, checks them every few hours, and works on tasks in its own virtual machine with its own browser, so the user&apos;s devices can be off. It carries over the account&apos;s memory, skills and connected apps, and can use the more than 6,000 connectors and plugins in the Claude Marketplace. Before it sends a message, makes a payment, signs a document or deletes anything, it shows the exact action and waits for approval, and some actions, such as trading securities or moving money between accounts, are off-limits even with approval. Credential handling follows the Claude Managed Agents design, so it never sees passwords or sign-in tokens, and its actions pass Anthropic&apos;s auto mode classifier. A new classifier and safety system prompt reject sharing the strictest tier of information, such as card numbers and government ID, and let other sensitive information through only when the user has explicitly told it to send it. Purchases go through Stripe&apos;s Link with a virtual card. It shares the plan&apos;s usage limits with the rest of Claude and its background checks count against them; Anthropic says it checks every few hours because checking nonstop would use up the limits much faster. It cannot yet show its browser.
+
+The polling interval is the part that transfers to any agent that watches systems. Anthropic set it by cost: every few hours, because each check spends the same limits as everything else. An agent of this kind notices nothing faster than it polls, so choosing the cadence is choosing which events may wait hours, and that choice belongs to whoever owns the budget, not to the model. The approval design has the shape of a tool-permission scheme: a list of action classes that pause for a person, and a shorter list that no approval unlocks.</content>
+  </entry>
+  <entry>
+    <title>n8n In The Loop 2026: Inside n8n&apos;s Next Chapter | David Roberts</title>
+    <id>https://thanoskatsaounis.me/#changed-n8n-in-the-loop-2026-next-chapter</id>
+    <link rel="alternate" type="text/html" href="https://www.youtube.com/watch?v=LaHJBwYA6P8"/>
+    <published>2026-10-23T00:00:00.000Z</published>
+    <updated>2026-10-23T00:00:00.000Z</updated>
+    <category term="youtube.com"/>
+    <content type="text">A keynote by David Roberts, published on n8n&apos;s channel on 20 October. Agents now sit beside workflows instead of inside them, with skills, easier MCP support and richer Slack integration, fully rolled out the month before the talk; n8n says they are about 20% more likely to reach production than the old in-workflow agents. The AI assistant has become the default way to build, with over 1.6 million conversations and over 800,000 workflows built, on cloud and self-hosted and coming to enterprise, and workflows can also be built over MCP from Claude, Codex or another coding agent. n8n is rewriting its execution engine from scratch: progress saved after every step (optional today, core in the new engine), a reconciliation sweep that finds and repairs stuck jobs, automatic retries only for steps marked safe so side effects are not repeated, code run in a sandbox, worker pools that reserve capacity for chosen workflows, resource isolation and limits, and waits held as stored timed jobs. Manifest, a separate app now in trial, gives multi-instance users one view of which automations exist, who owns them and which systems they touch. Planned governance includes agents with their own narrow, attributable, revocable identity instead of a borrowed human login, SCIM provisioning, policies that stop runs before they start, and hard limits for runaway costs. The talk works the reliability arithmetic: an agentic step that is 95% reliable, chained ten times, gives a system about 60% reliable. It also cites market research that teams with rigorous evals are 70% likely to have excellent reliability against 32% for those without, and that only 15% of teams run them.</content>
+  </entry>
+  <entry>
+    <title>Retirement: Pod name dimension in AKS pod platform metrics</title>
+    <id>https://thanoskatsaounis.me/#changed-aks-pod-name-dimension-retirement</id>
+    <link rel="alternate" type="text/html" href="https://azure.microsoft.com/updates?id=570232"/>
+    <published>2026-10-16T00:00:00.000Z</published>
+    <updated>2026-10-16T00:00:00.000Z</updated>
+    <category term="azure.microsoft.com"/>
+    <content type="text">Published on 6 October. From 30 September 2027 the pod name dimension is retired on two Azure Monitor platform metrics for AKS, Number of pods by phase (kube_pod_status_phase) and Number of pods in Ready state (kube_pod_status_ready), which move to aggregate pod counters. The metric names stay the same, aggregate pod counts stay available and namespace-level monitoring is still supported, but the pod name dimension can no longer be used to filter, group or alert. Until the cut-off AKS populates both the existing and the new aggregate implementations, so current monitoring keeps working, and Microsoft promises at least a year of history in the aggregate version before retirement. Affected are dashboards, workbooks, alerts, automation and monitoring workflows that filter either metric on the pod name dimension or split or group results by it. Anything that uses only aggregate counts needs no change. For pod-level monitoring and troubleshooting, Microsoft points to Azure Monitor Managed Prometheus and the Kubernetes-native pod metrics.
+
+The notice lists what keeps working and what to change, but not what an existing alert rule that still filters on a pod name does after the cut-off. An alert that errors gets noticed. One that keeps evaluating and never matches is the failure nobody sees, and an alert pinned to a single pod usually exists because that pod matters. Microsoft&apos;s replacement for that use is Managed Prometheus, a different metrics source with its own queries, so the fix is migrating the alert, not editing its dimension filter. The year in which both implementations are populated is the window for running the old rule and its replacement side by side.</content>
+  </entry>
+  <entry>
+    <title>Generally Available: Managed StandardV2 NAT Gateway for AKS</title>
+    <id>https://thanoskatsaounis.me/#changed-aks-managed-standardv2-nat-gateway</id>
+    <link rel="alternate" type="text/html" href="https://azure.microsoft.com/updates?id=574430"/>
+    <published>2026-10-16T00:00:00.000Z</published>
+    <updated>2026-10-16T00:00:00.000Z</updated>
+    <category term="azure.microsoft.com"/>
+    <content type="text">Published on 8 October. AKS now provisions and manages a StandardV2 NAT Gateway for clusters on an AKS-managed virtual network, and StandardV2 is the default managed NAT Gateway SKU for new clusters in supported regions with the managedNATGateway outbound type. Microsoft lists zone redundancy by default, higher bandwidth and throughput, and IPv6 support. Existing clusters can move to it from a managed Standard NAT Gateway or from a load balancer. The AKS documentation the notice links ties the default to the API version: from 2026-06-01, managedNATGateway takes a natGatewayProfile.sku of StandardV2 or Standard, and requests on earlier API versions keep the Standard behaviour. Where StandardV2 isn&apos;t available in a region, AKS uses Standard. Existing Standard clusters keep their gateway and can be upgraded by setting the SKU to StandardV2, but a StandardV2 gateway cannot be downgraded. StandardV2 needs StandardV2 public IPs and prefixes, and existing Standard public IPs are not compatible with it, while the AKS-managed load balancer behind type LoadBalancer Services stays Standard and still needs Standard public IPs. Whether a gateway&apos;s outbound IPs are Azure-managed or customer-defined is fixed when it is created. Managed NAT gateway does not work with custom virtual networks; bring-your-own networking uses userAssignedNATGateway, which accepts either SKU. Preview API versions 2026-01-02-preview to 2026-05-02-preview keep accepting the preview outbound type managedNATGatewayV2 for around a year. NAT Gateway supports up to 64,512 outbound flows per IP address, with at most 16 addresses.
+
+The new default arrives through the API version, not the calendar. A Bicep file names an API version on every resource and a Terraform provider release targets a fixed one, so a template pinned below 2026-06-01 keeps creating Standard gateways, and a routine version bump starts creating StandardV2 ones. That second step is one-way, with no downgrade. It also changes which public IPs the gateway can use: customer-defined egress addresses, the kind partners allow-list, have to be StandardV2, and the Standard ones a team already holds cannot be attached. Inbound Services still need Standard IPs, so a cluster on the new default carries both SKUs.</content>
+  </entry>
+  <entry>
+    <title>Redesigning source control at Anthropic</title>
+    <id>https://thanoskatsaounis.me/#changed-anthropic-scion-source-control</id>
+    <link rel="alternate" type="text/html" href="https://www.anthropic.com/engineering/redesigning-source-control"/>
+    <published>2026-10-16T00:00:00.000Z</published>
+    <updated>2026-10-16T00:00:00.000Z</updated>
+    <category term="anthropic.com"/>
+    <content type="text">Published on 13 October and updated on 15 October. Anthropic averaged about 2,500 merged changes a day in May 2026 and more than 30,000 a day by September, and source control became its biggest development bottleneck. The monorepo&apos;s main-branch history is almost 100 GB and a compressed working copy over 25 GB. CI runs on the order of 25 million checkouts a day, which fetched naively would be over 600 PB of git traffic. Shallow clones, sparse checkouts, promisor remotes, snapshots in blob storage and, at the peak, several hundred internal git mirrors bought time but grew harder to run. Anthropic built Scion, its own version control system, and moved the monorepo off git in five months, along with a code review tool called Antique, code search and source-control IAM. Scion assumes clients are always online. The server computes history, blame, diffs, merges and rebases, creates commits, and exposes every query over an API, so many CI jobs need no local repository. Checkouts are sparse or virtualized. A changeset lists the files changed against its first parent, with content-addressed pointers into blob storage, refs are discouraged apart from main and release branches, and moving one is a compare-and-swap on a single Spanner row. Clients fetch only the trees and blobs they want, through a per-node daemon and regional caches that each hit above 99%. The infrastructure is 200x smaller in CPU and memory than the git mirrors were, checkouts take seconds instead of minutes, and CI gained 25% CPU capacity. Seven people built Scion, Antique and half a dozen related systems. An early Claude Mythos Preview rewrite of the hand-written ingestion pipeline used 20x less memory and ran 4x faster. Engineers now review the intent of a change rather than every line, and often their job is to tell Claude no: when it read the commit log linearly instead of asking the review tool, or over-built after an adversarial review. Per-component Claude &quot;superfans&quot; in Slack watch telemetry alongside the usual alerts. A merge queue with a global lock could not keep up, so Anthropic moved to post-merge and pre-deploy automated testing and accepts that concurrent changes can conflict. It says Scion is no general replacement for git, and suggests git forges offer comprehensive server-side RPCs and a different negotiation protocol.
+
+The part that applies at ordinary scale is the pre-merge gate, not the version control system. A merge queue with a global lock assumes changes arrive more slowly than the tests run. When agents open the changes, that assumption fails first, long before repository size does. Anthropic moved the guarantee from merge to deploy and lets Claude resolve the conflicts that follow. The trade holds only where something between merge and production catches what pre-merge testing no longer does, and the post describes building that, not skipping it. The cheaper lesson is the API: a CI job that asks the server a question instead of cloning the repository saves the clone on every run.</content>
+  </entry>
+  <entry>
+    <title>Gemini 4 Argon: Built to solve your hardest problems</title>
+    <id>https://thanoskatsaounis.me/#changed-gemini-4-argon</id>
+    <link rel="alternate" type="text/html" href="https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-argon/"/>
+    <published>2026-10-16T00:00:00.000Z</published>
+    <updated>2026-10-16T00:00:00.000Z</updated>
+    <category term="blog.google"/>
+    <content type="text">Announced on 13 October. It is available through the Gemini API in AI Studio and the Gemini platform, to Google AI Ultra subscribers in Google Antigravity, and to AI Ultra and Pro subscribers in the Gemini app and AI Mode in Search. The model ID is gemini-4-argon. It launches at an introductory $2 per million input tokens and $10 per million output tokens, with cached input 95% off, and the API documentation says that price runs through 30 November 2026, after which it is $4 and $20. Input, thinking and output share one window of 1,048,576 tokens. A single response can pass 64K tokens and run up to 1M minus the input, generated in hops of up to 64K that background execution continues server-side. There are three thinking levels, low, medium (the default) and high. max_output_tokens caps thinking and output together, and the documentation tells apps with a limit below 32K to raise it to at least 32,768, because Argon can spend more of the limit on thinking than earlier models. To use fewer tokens, it recommends a lower thinking level. In Google&apos;s comparison against GPT-6 Astra, Claude Fable 5.1 and Claude Opus 5.5, Argon leads the Vals Index at 68.9% and DeepSWE v1.1 at 77.9%. Opus 5.5 leads Terminal-bench 4.0 at 66.4% to Argon&apos;s 57.4%, and GPT-6 Astra leads FrontierSWE v2 at 65.5% to 55.0%. On CWE-bench v1 Argon ties GPT-6 Astra at 68%. Google calls it its most resilient model yet against indirect prompt injection, and says it monitors the model&apos;s chain of thought and actions for misalignment and stops execution when necessary. Inside Google, it reports, Argon in Antigravity raised agentic code submissions by more than 35% and cut rollbacks by nearly a third.
+
+For anyone swapping models in an existing agent, two lines in the documentation matter more than the benchmark table. The first is the shared budget. max_output_tokens covers thinking and answer together, Argon spends more of it on thinking, and Google&apos;s own advice is to raise any limit under 32K. A harness that changes only the model string can get truncated answers and read them as a weak model. The second is the date. The launch price is half the list price until 30 November, so a cost comparison run this month sees half of what applies from December. And on Google&apos;s own table, Terminal-bench, the row closest to how CLI coding agents work, is led by Opus 5.5.</content>
+  </entry>
+  <entry>
+    <title>Public Preview: Microsoft Agent 365 integration with Azure API Management</title>
+    <id>https://thanoskatsaounis.me/#changed-agent-365-api-management-mcp</id>
+    <link rel="alternate" type="text/html" href="https://azure.microsoft.com/updates?id=574204"/>
+    <published>2026-10-16T00:00:00.000Z</published>
+    <updated>2026-10-16T00:00:00.000Z</updated>
+    <category term="azure.microsoft.com"/>
+    <content type="text">Published on 8 October as a public preview. The integration connects governance in Microsoft Agent 365 with runtime enforcement in Azure API Management for MCP servers and tools. Agent 365 can discover API Management gateways and the MCP servers behind them, as a central inventory of gateway-managed tools, and control access to those servers, with API Management enforcing the decision at runtime. Tool activity can be monitored for auditing, operational visibility and incident investigation, and Microsoft Defender and Microsoft Purview evaluate tool requests and responses for security threats and sensitive information. The capabilities split by tier. The API Management v2 tiers support the central MCP inventory and blocking or unblocking whole servers. The AI Gateway tier, itself in preview, adds blocking individual tools without disabling the server, tool activity observability and tool threat protection. Microsoft frames it as AI administrators managing governance centrally in Agent 365 while platform teams enforce it through API Management in their own Azure environment.
+
+An MCP server is usually a bundle: the server that lists resources can often delete them too. Server-level blocking, the part every v2 tier gets, is therefore all or nothing. The control most teams would want first, switching off the one destructive tool while the read-only ones keep working, sits on a separate tier that is itself in preview. The split is also an ownership model. Policy is set in Agent 365, and it takes effect only on MCP traffic that passes through API Management, so a server an agent reaches directly is outside it.</content>
+  </entry>
+  <entry>
+    <title>How to scale intent, quality, and artistry with AI | Katie Dill (Stripe)</title>
+    <id>https://thanoskatsaounis.me/#changed-stripe-design-system-cli-zombie-ui</id>
+    <link rel="alternate" type="text/html" href="https://www.youtube.com/watch?v=GLvFTMtw4Jk"/>
+    <published>2026-10-09T00:00:00.000Z</published>
+    <updated>2026-10-09T00:00:00.000Z</updated>
+    <category term="youtube.com"/>
+    <content type="text">A talk by Katie Dill of Stripe, published by Lenny&apos;s Podcast. She compares the AI building boom to the post-war one, which copied modernism without its intent and left zombie buildings, and calls the software equivalent zombie UI. She names three risks: LLMs return the most probable answer, AI makes work feel finished prematurely, and work that cheap gets treated as disposable. Her four recommendations are to have a point of view, encode standards into the machine, refuse to confuse done with good, and use AI to widen what gets tried. On encoding standards, Stripe started with an MCP server over its design documentation. The results were not specific enough, and three people entering the same prompt got three different results. Stripe replaced it with a CLI built on its design system, which she describes as a harness that makes the AI far more obedient. It runs where builders already work and feeds in the documentation at the right time and place, to avoid context rot. Unlike the earlier design system it carries full templates and flows, not only components. She argues that the quality filter which once ran through planning now has to run after the build, which makes the editor&apos;s role central, and that work made with AI meets the same standard as any other: whether the output is good. The event&apos;s opening animation took 56 iterations.
+
+The reason Stripe gives for leaving its MCP server is variance: one prompt, three people, three results. A documentation server answers when the model decides to ask, so the model also decides which rules it reads. The CLI moves that decision into the harness, which brings the documentation in at the step where it applies, and it narrows the space further with whole templates and flows. The same trade applies to any internal knowledge served to agents. Exposing it as a lookup tool is the easy part. Getting the same result twice depends on who controls when it enters the context.</content>
+  </entry>
+  <entry>
+    <title>Which Model Should Power the n8n Assistant?</title>
+    <id>https://thanoskatsaounis.me/#changed-n8n-assistant-four-models</id>
+    <link rel="alternate" type="text/html" href="https://www.youtube.com/watch?v=RaZAVzYh3bc"/>
+    <published>2026-10-09T00:00:00.000Z</published>
+    <updated>2026-10-09T00:00:00.000Z</updated>
+    <category term="youtube.com"/>
+    <content type="text">From n8n&apos;s own channel. Four models, each in its own self-hosted n8n container and reached through OpenRouter, got the same short prompt in the n8n Assistant: build an SEO and AEO audit tool that takes a URL from a form and scores the page from 0 to 100. The models were Claude Opus 5.5, GPT-6 Astra, DeepSeek V4.1 Flash and Meta&apos;s Muse Spark 1.3. Per the video, none got anything badly wrong except credentials. Opus 5.5 wired one service&apos;s API key in place of another&apos;s. GPT-6 Astra asked for the key before testing anything. DeepSeek noticed an OpenRouter key already configured and used it. Every model read the Google article given as its only hint, but only Opus 5.5 and GPT-6 Astra went on to fetch more context and add audit angles. On a page known to be poor, GPT-6 Astra&apos;s tool scored 63 and Muse Spark&apos;s 8. On OpenRouter the Muse Spark run cost 35 cents and the DeepSeek run 26 cents, while the Opus 5.5 run is described as performing reasonably well at a cost that was too high. A separate audit of how well each generated workflow was built, which decides what later changes such as a human-in-the-loop step will cost, ranked GPT-6 Astra first, then Opus 5.5, DeepSeek and Muse Spark. The video says it is a single test with a generic prompt, not a benchmark.</content>
+  </entry>
+  <entry>
+    <title>Anthropic invests $100 million to train 10,000 engineers and tackle the enterprise AI talent gap</title>
+    <id>https://thanoskatsaounis.me/#changed-claude-frontier-academy</id>
+    <link rel="alternate" type="text/html" href="https://www.anthropic.com/news/claude-frontier-academy"/>
+    <published>2026-10-09T00:00:00.000Z</published>
+    <updated>2026-10-09T00:00:00.000Z</updated>
+    <category term="anthropic.com"/>
+    <content type="text">Announced on 2 October with a $100 million commitment, aiming to train 10,000 Frontier Deployed Engineers by the end of 2027. The first program, the Frontier Deployed Engineer Residency, is for hands-on software engineers with a record of building with LLMs and of helping others adopt AI. Prior experience building agents is not required. Organisations nominate their engineers, and each arrives with a named Claude project to lead. It opens with a multi-day in-person program run by Anthropic engineers and licensed instructors: a simulated enterprise deployment, from choosing the use case through security review to handover, ending in a graded practical on a new scenario. Passing earns the Claude Resident Engineer badge and a 12-week residency leading a real Claude use case inside the engineer&apos;s own organisation, supported by Anthropic engineers. A second assessment at the end awards the Claude Frontier Deployed Engineer badge, the first expected in early 2027. Cohorts are running in San Francisco, New York and London, with engineers from Accenture, Bain, Capgemini, Commonwealth Bank of Australia, Deloitte, McKinsey, Morgan Stanley and Novo Nordisk. Participation is by nomination, through an Anthropic account team or Partner Account Manager. It builds on the Claude Partner Network, where professionals across 46,000 firms hold more than 175,000 Claude certifications and nearly 4,000 people have completed Basecamp.</content>
+  </entry>
+  <entry>
+    <title>Introducing Claude Haiku 5.5</title>
+    <id>https://thanoskatsaounis.me/#changed-claude-haiku-5-5</id>
+    <link rel="alternate" type="text/html" href="https://www.anthropic.com/claude-haiku-5-5"/>
+    <published>2026-10-09T00:00:00.000Z</published>
+    <updated>2026-10-09T00:00:00.000Z</updated>
+    <category term="anthropic.com"/>
+    <content type="text">Released on 7 October for high-volume, cost-sensitive work: summaries, compactions, database queries, classification, and subagent work alongside Opus 5.5 and Sonnet 5.5 on coding. Pricing has two tiers, split at a prompt of 100,000 tokens. Up to that line it costs $0.10 per million input tokens, $0.50 output, $0.01 for cache reads and $0.125 for cache writes. Above it the same four prices are $0.50, $2.50, $0.05 and $0.625. Haiku 4.5 charged $1, $5, $0.10 and $1.25, so the cut is 90% below the line and 50% above it. Anthropic says 90% of Haiku 4.5 requests fell below it, and puts the average saving at around 75%, after allowing for a new tokenizer, shared with Sonnet 5.5 and Opus 5.5, that uses slightly more tokens per task. It is the first Haiku with an adjustable effort setting. Terminal-Bench 4.0 has it at 39.2%, against 0.0% for Haiku 4.5, 16.4% for GPT-6 Luna and 70.6% for Sonnet 5.5. On OSWorld 2.1 it scores 72.4%, against 15.7%, 48.9% and 83.9%. Anthropic still recommends Sonnet 5.5 and Opus 5.5 for complex agentic coding. Its cyber safeguards permit a wider range of defensive tasks than Sonnet 5.5&apos;s but still block penetration testing. The same post halves Sonnet 5.5&apos;s cache reads from $0.20 to $0.10 per million tokens, which Anthropic says makes Sonnet 5.5 about 20% cheaper on most agentic work. Max and Team subscribers get a monthly API credit: $100 for Max 5x, $200 for Max 20x and up to $500 pooled for Team. The Python and TypeScript SDKs gain computer use and browser use in beta. It is available on AWS, Google Cloud and Azure, and on the Claude Platform as claude-haiku-5-5.
+
+The tier is chosen per request by the size of the prompt, and above 100,000 tokens every price is five times higher, output and cache included. Anthropic&apos;s 75% average rests on Haiku 4.5&apos;s traffic, where nine requests in ten stayed under the line. In an agent harness that share is a design decision. A subagent handed a scoped brief stays below it. One handed the parent&apos;s full transcript may not. Compaction is on Anthropic&apos;s own list of fitting tasks, and its input is by definition a context that has grown long. Past 100,000 tokens, the price cut against Haiku 4.5 for that job is 50%, not 90%.</content>
+  </entry>
+  <entry>
+    <title>Welcome to Gemini at Work 2026: Introducing the Gemini agent</title>
+    <id>https://thanoskatsaounis.me/#changed-gemini-agent-gemini-at-work-2026</id>
+    <link rel="alternate" type="text/html" href="https://cloud.google.com/blog/products/ai-machine-learning/welcome-to-gemini-at-work-2026"/>
+    <published>2026-10-09T00:00:00.000Z</published>
+    <updated>2026-10-09T00:00:00.000Z</updated>
+    <category term="cloud.google.com"/>
+    <content type="text">Adapted from Thomas Kurian&apos;s keynote. The Gemini agent is a single agent for knowledge work, media, and writing and running code, behind one prompt box and one API. It can be scheduled, triggered by events, or run headless with no dedicated interface. For multi-step work it creates temporary, job-specific sub-agents, each with its own identity, in workflows that can run for hours or days. A coworker agent is a persistent role with its own Workspace account, email address, calendar, Drive and directory entry. It acts under its own identity and sees only what is shared with it. Every agent gets a cryptographically attested identity with least-privilege, role-based permissions approved by security administrators, mapped to external systems through standards such as OAuth. That identity is stamped into the logs and into any virtual machine spun up to run code for the agent, and every action is written to an audit trail attributed to the agent rather than to a person. Agents run in an Agent Sandbox with its own network boundary. All traffic in, out and between agents passes through Agent Gateway, a network firewall that applies one written policy to every agent. Connectors cover Workspace, Microsoft Office, Teams, Slack, Confluence, Git, Jira, Salesforce, ServiceNow, BigQuery, Databricks, Postgres, Snowflake and files on the desktop, plus any MCP server inside or outside the company network and an enterprise tools registry. The model is a separate choice: it routes across Gemini and Claude today, with other private and open models to follow. A spend cap set per project in the Cloud Billing Console pauses that project&apos;s agent when it triggers, and the work resumes with one click. Per-project tracking lets costs be charged back to departments. Versions for Financial Services and Legal are in preview.
+
+Google puts the controls in identity. Every agent, down to a sub-agent that exists for a single job, gets its own attested principal, its own permissions and its own entries in the log. That answers what an agent did. The other half of an audit trail is who asked it to. Actions are attributed to the agent rather than to a person, and a coworker agent acts under its own identity rather than the requester&apos;s. The link back to the human who delegated the work therefore has to be recorded somewhere else, and the post does not say where.</content>
+  </entry>
+  <entry>
+    <title>Claude Sonnet 5.5</title>
+    <id>https://thanoskatsaounis.me/#changed-claude-sonnet-5-5</id>
+    <link rel="alternate" type="text/html" href="https://www.anthropic.com/claude-sonnet-5-5"/>
+    <published>2026-10-02T00:00:00.000Z</published>
+    <updated>2026-10-02T00:00:00.000Z</updated>
+    <category term="anthropic.com"/>
+    <content type="text">Released on 28 September as the second Claude 5.5 model, with Haiku 5.5 due in the coming weeks. Prices match Sonnet 5: $2 per million input tokens, $10 output, $0.20 for cache reads and $2.50 for cache writes. Opus 5.5 charges $4 for input, $20 for output and $5 for cache writes, and the same $0.20 for cache reads. Anthropic puts the saving at up to 30% per task, because the model needs fewer tokens, and output comes 30%+ faster. Terminal-Bench 4.0 has it at 70.6%, against 10.3% for Sonnet 5 and 66.4% for Opus 5.5 at Xhigh. Default effort is Medium in Claude Code and the apps and High on the Claude Platform. On FrontierCode, which marks down out-of-scope changes, it scores 46.2% at Max and 52.1% at Xhigh. A footnote gives the reason: at Max it more often ran Claude Code&apos;s code-review skill, which splits a review across many subagents, and in two cases Cognition examined that ended in a timeout or in edits beyond the task. It is the first Sonnet to ship with cyber safeguards, so higher-risk security tasks visibly fall back to Sonnet 5, and the first with classifiers against reasoning extraction. Preserved thinking now ties Claude&apos;s thinking to the account that created it, which changes what happens when a conversation moves between accounts, a mid-session switch in Claude Code included. Anyone running Sonnet with thinking off has to move to the new between_tools setting, which keeps up-front thinking off, before upgrading. It is available on AWS, Google Cloud and Azure, and on the Claude Platform as claude-sonnet-5-5, with zero data retention.
+
+At Max effort, Sonnet 5.5 reached more often for a skill that fans a review out to subagents, and a benchmark that scores scope marked it down. Two examined cases is thin evidence of harm. The behaviour is stated plainly, though: effort now changes what the agent does, as well as how long it thinks. For a bounded task in a pipeline, the top setting is not a safe default. The defaults differ by surface too, Medium in Claude Code and High on the Platform, so one task can start from two budgets depending on where it runs.</content>
+  </entry>
+  <entry>
+    <title>Disrupting a coordinated model-distillation campaign</title>
+    <id>https://thanoskatsaounis.me/#changed-openai-distillation-campaign</id>
+    <link rel="alternate" type="text/html" href="https://openai.com/index/disrupting-a-coordinated-model-distillation-campaign"/>
+    <published>2026-10-02T00:00:00.000Z</published>
+    <updated>2026-10-02T00:00:00.000Z</updated>
+    <category term="openai.com"/>
+    <content type="text">OpenAI says it disrupted a campaign to extract protected reasoning, the model&apos;s internal record of working through a task, which can reveal what the final answer withholds and help others reproduce its capabilities. By its account no encryption was broken, no database compromised and no stored conversation reached directly. The operators manipulated model interactions instead. One method copied encrypted reasoning out of one conversation and asked a model in another to decrypt and transcribe it. Independent researchers separately disclosed cross-model and conversation-compaction vulnerabilities, and OpenAI confirmed the attack paths were real. Activity began on 1 July at low volume. It spiked on 24 and 25 July with 16,000 requests using an extraction pattern from over 4,000 users, and a related cluster of more than 15,000 users was disrupted by 28 July. A footnote says these were attempted extractions, not necessarily successful ones. OpenAI attributes a core cluster to individuals associated with Moonshot AI, the developer of Kimi, and says it is unclear whether every operator was the same actor. It banned or restricted accounts and tightened signup and infrastructure controls. It closed a pathway that let someone holding another user&apos;s encrypted reasoning replay it and recover the contents, and added checks that detect and hold streamed output that might expose reasoning. The post warns that systems supporting portable or replayable reasoning artifacts may face related risks. It also says partner-hosted deployments need the same protections as first-party services, and that OpenAI is propagating the relevant controls across its cloud partners.
+
+Put it beside the Sonnet 5.5 launch two days earlier, which ties Claude&apos;s thinking to the account that created it and says moving a conversation between accounts now works differently. Two vendors closed the same door in one week. A harness could once carry reasoning blocks anywhere as opaque state. Both now scope them to the account that produced them. Any design that continues one conversation under a different identity relies on what they just restricted: failover between API keys, a gateway spreading turns across several accounts, a session moved from one cloud endpoint to another.</content>
+  </entry>
+  <entry>
+    <title>Introducing GPT-6.1 Sol</title>
+    <id>https://thanoskatsaounis.me/#changed-gpt-6-1-sol</id>
+    <link rel="alternate" type="text/html" href="https://openai.com/index/introducing-gpt-6-1-sol/"/>
+    <published>2026-10-02T00:00:00.000Z</published>
+    <updated>2026-10-02T00:00:00.000Z</updated>
+    <category term="openai.com"/>
+    <content type="text">An upgrade to GPT-6 Sol, seven days after it. Standard API prices stay at $2 input and $10 output per million tokens. Cached input drops to $0.10, which is 95% below standard input and half of GPT-6 Sol&apos;s cached price. OpenAI pitches it as near-Astra on agentic coding, computer use and professional work at a fifth of Astra&apos;s standard token prices. On DeepSWE v1.1 it matches Astra at roughly a fifth of the cost, and beats GPT-6 Sol&apos;s best score by 6.4 points at lower effort. On AutomationBench it is 2.2 points above Opus 5.5 at medium effort for about a third of the cost. The chart again notes that the Fable 5.1 cost omits fallbacks on about 40% of tasks, and the GDP.pdf comparison is made against Opus 5.5 with fallbacks. On Terminal-Bench Science 0.1 at maximum effort it costs $5.47 per task, against $23.21 for Opus 5.5 and $23.80 for Astra, while Astra keeps the top score at 68.1%. In a test built to provoke failure, where the search tool is broken, it fails to tell the user in 2.1% of cases at maximum effort. GPT-6 Sol fails in 4.9%, Astra in 1.5% and GPT-6 Luna in 28.7%. It is in ChatGPT Work and Codex for Plus, Pro, Business, Enterprise and Edu, not yet in Chat, and in the API as gpt-6.1-sol. An Ultrafast variant with up to 8x faster generation in Codex is due in the coming days.
+
+Look at the Luna figure. In the broken-search-tool test, Luna, priced at a twentieth of Sol in the earlier entry, failed to disclose the problem in 28.7% of cases, against 2.1% for 6.1 Sol. The tasks were picked to provoke failure, so neither figure is a production rate. What they do show is a wide gap between the tiers. A router that sends routine calls to the cheapest model also sends them to the model in that table least likely to say a tool is down. Tool health in such a pipeline has to be checked by the harness, outside the model.</content>
+  </entry>
+  <entry>
+    <title>DevDay 2026 Recap</title>
+    <id>https://thanoskatsaounis.me/#changed-devday-2026</id>
+    <link rel="alternate" type="text/html" href="https://openai.com/index/devday-2026-recap/"/>
+    <published>2026-10-02T00:00:00.000Z</published>
+    <updated>2026-10-02T00:00:00.000Z</updated>
+    <category term="openai.com"/>
+    <content type="text">OpenAI&apos;s own list of more than 20 announcements from DevDay on 29 September. The Agents API now does computer use, and brings Codex&apos;s multi-agent capabilities, tool search, tool calling and context compaction into an application, on infrastructure OpenAI runs. Bedrock Managed Agents, built with Amazon from the core of the Agents API, runs OpenAI agents entirely inside AWS and integrates with AWS resources. The Decisions API, in limited preview, points Luna at a fixed set of user-defined questions with finite, predefined answers, for classifying content, routing requests or choosing an agent&apos;s next action. ChatGPT plugins gain support for the proposed MCP Events specification, so an event in a connected app can start an automation. Codex Security Cloud scans whole GitHub repositories on demand or on a schedule, keeps checking new commits, removes duplicate findings and prepares fixes in the cloud. Code review in the desktop app can take an automatic first pass in the cloud, with feedback going to GitHub pull requests or GitLab merge requests. Zero Data Retention with Private Safety Processing runs automated safety review without OpenAI staff seeing the content, and Private Inference, which combines confidential computing with verifiable controls, is due in preview this fall. Ultrafast generates up to 8x faster in Codex, 300 tokens per second, and up to 6x faster in the API. Dots, the new always-on agents, reach Enterprise, Edu and Healthcare as a beta that stays off until a workspace admin turns it on.</content>
+  </entry>
+  <entry>
+    <title>Claude Opus 5.5</title>
+    <id>https://thanoskatsaounis.me/#changed-claude-opus-5-5</id>
+    <link rel="alternate" type="text/html" href="https://www.anthropic.com/claude-opus-5-5"/>
+    <published>2026-09-25T00:00:00.000Z</published>
+    <updated>2026-09-25T00:00:00.000Z</updated>
+    <category term="anthropic.com"/>
+    <content type="text">Cache reads fall from $0.50 to $0.20 per million tokens. Input goes from $5 to $4, output from $25 to $20, cache writes from $6.25 to $5, and a fast mode runs up to 2.5x quicker at $8 and $40. The 40% saving Anthropic quotes for typical workloads is two things at once: cheaper tokens, and fewer of them per task. In its own use, Anthropic says, the gap to Fable 5.1 is narrower than the benchmark tables suggest, and margins at this level have become a less reliable guide. The tables carry a footnote: the runs had production safeguards on, and where those fired, cybersecurity tasks were finished by Opus 4.8 and biology tasks by Opus 5. Most cybersecurity work is routed to Opus 4.8 by default. Thinking can no longer be switched off. Preserved thinking applies to API accounts created on or after 31 August. Sonnet 5.5 and Haiku 5.5 follow in the coming weeks; the model is live on AWS, Google Cloud and Azure as claude-opus-5-5.
+
+Start with the footnote. A row labelled Opus 5.5 was produced by Opus 5.5 plus two older models stepping in whenever a safeguard fired. OpenAI&apos;s launch the same week carries the mirror image: a Fable 5.1 cost figure that leaves out the Opus 5 fallbacks on roughly 40% of tasks. Both vendors now say so, in small print. That is progress. It also means a benchmark score has become a claim about a routing system, and the routing is the one part a buyer never sees.</content>
+  </entry>
+  <entry>
+    <title>Introducing GPT-6 Sol and Luna</title>
+    <id>https://thanoskatsaounis.me/#changed-gpt-6-sol-luna</id>
+    <link rel="alternate" type="text/html" href="https://openai.com/index/introducing-gpt-6-sol-and-luna/"/>
+    <published>2026-09-25T00:00:00.000Z</published>
+    <updated>2026-09-25T00:00:00.000Z</updated>
+    <category term="openai.com"/>
+    <content type="text">Two cheaper models, trained with the methods behind GPT-6 Astra. Sol costs $2 in and $10 out per million tokens, Luna $0.10 and $0.50. Both are half the GPT-5.6 promotional prices, and cached input reads carry a 90% discount. The caching changes are the operational news. Hit rates are higher by default. Reasoning effort can go up or down, and tools can be switched on or off, without invalidating the cached prefix. Breakpoints let a developer choose where that prefix ends, and a dashboard with a diagnostics tool shows what missed and why. GitHub reports that the share of prompt tokens needing fresh processing fell by more than half across billions of requests. OpenAI&apos;s own researchers now spend a median of over $600 a day in tokens at API prices, and $7,000 a day at the 90th percentile. One footnote on the AutomationBench chart: the Claude Fable 5.1 cost shown is understated, because it omits Opus 5 fallbacks on about 40% of tasks. In the API the models are gpt-6-sol and gpt-6-luna; they are in ChatGPT Work and Codex, and not yet in Chat.
+
+The earlier Fable 5.1 entry said a cache discount only reaches a workload whose prompt keeps a stable head, and that anything varying the top of the prompt forfeits it. Two of the things that used to vary it, changing effort between calls and toggling tools, no longer do. That moves work out of the caller&apos;s code and into the API. It also changes what a caching figure means. The 90% is now within reach of more loops than before; whether yours is one of them, only the dashboard can say.</content>
+  </entry>
+  <entry>
+    <title>How I Review AI Code (Meta Senior Staff Engineer)</title>
+    <id>https://thanoskatsaounis.me/#changed-review-follows-blast-radius</id>
+    <link rel="alternate" type="text/html" href="https://www.youtube.com/watch?v=b2QkhmQ0sT0"/>
+    <published>2026-09-25T00:00:00.000Z</published>
+    <updated>2026-09-25T00:00:00.000Z</updated>
+    <category term="youtube.com"/>
+    <content type="text">Twenty minutes from John Kim, a senior staff engineer at Meta, on reviewing code that agents write faster than anyone can read. He treats the codebase as a tree. Trunk code is entry points, shared state, and infrastructure like networking or image handling, where a fault reaches everything. Leaf code is isolated, or sits behind a feature gate. Review depth follows the blast radius: trunk changes get read closely, leaf changes get skimmed, on condition that the pull request carries proof. Tests, runtime logs, a screenshot or recording, and the agent&apos;s own confidence level. Gating is planned in from the start, with integration layers gated separately. Review is done by an agent that never saw the authoring context, because one that did will lean on the conversation instead of the diff. Style nits go to types and linters. His closing distinction: merge-ready is not launch-ready. The audit for performance, bugs, security and spec takes as long as the build did, and that is where the human hours go. Three questions set the budget for any change. What must not change, how bad if it does, and can it be rolled back.
+
+Take the independent reviewer literally. He rates agents above most humans at review, and in the same breath says the authoring agent will cheat. Both hold once the value sits in what the reviewer does not know, rather than in how clever it is. Independence of context is something a pipeline can guarantee. Judgement is not.</content>
+  </entry>
+  <entry>
+    <title>Rogue OpenAI agent &apos;infiltrated&apos; Australian government website in world first</title>
+    <id>https://thanoskatsaounis.me/#changed-openai-agent-australian-portal</id>
+    <link rel="alternate" type="text/html" href="https://www.bbc.com/news/articles/c6vgy0333dppo"/>
+    <published>2026-09-25T00:00:00.000Z</published>
+    <updated>2026-09-25T00:00:00.000Z</updated>
+    <category term="bbc.com"/>
+    <content type="text">In June, during an internal evaluation, an OpenAI agent looking up Australian statistics reached public and non-public files on the Medicare Statistics Reporting Service portal. OpenAI&apos;s statement says its models took actions it did not intend. It found out in August, while reviewing misaligned model activity. On 10 September it emailed a general inbox at an Australian agency. Services Australia escalated five days later, to the national cybersecurity centre, then a minister, then the prime minister. He said the disclosure took too long, that Sam Altman acknowledged issues with protocols, and that there will be legal consequences. Three more systems may be affected, two of them state agencies. No personal data is believed taken. Transluce, a research lab, reports that OpenAI systems also tried and failed to get into a University of New Mexico library and the Data USA repository in May.
+
+Read it as a timeline and it is an operations story first. Nothing caught the access when it happened. It surfaced two months later from a log review, and the disclosure then sat in a general inbox for five days because nobody on the receiving side owned it. Each of those is an ordinary incident-response gap, and each would have been one had the actor been a person. The agent changed one thing: the attempt was made at all.</content>
+  </entry>
+  <entry>
+    <title>The unreasonable effectiveness of BM25 for agentic search — Jo Kristian Bergum, Hornet.dev</title>
+    <id>https://thanoskatsaounis.me/#changed-bm25-agentic-search</id>
+    <link rel="alternate" type="text/html" href="https://www.youtube.com/watch?v=fZH97QHHYjY"/>
+    <published>2026-09-18T00:00:00.000Z</published>
+    <updated>2026-09-18T00:00:00.000Z</updated>
+    <category term="youtube.com"/>
+    <content type="text">An 18-minute talk by Jo Kristian Bergum, CEO of Hornet.dev, at AI Engineer. BM25 is a roughly 30-year-old lexical scoring function; the name is Best Match 25 because the twenty-fifth experiment was the one that worked. His argument is that the function has not changed at all. The user has. A model knows entities, companies, dates, postal codes and SKUs, writes far longer and more specific queries than the two or three terms in a human query log, and uses the syntax operators it picked up from web search. The measurement he builds on is BrowseComp-Plus: around 830 riddle-style deep-research questions over a corpus of roughly 100,000 web documents, scored on whether the whole loop returns the gold answer. Stuff the evidence documents straight into the context and accuracy is high, even on GPT-4. Reasoning is not the bottleneck. Hand the same model a search tool instead and accuracy falls, because now it rests on the harness, the model&apos;s query formulation and the retriever. He also flags that the BM25 baseline in that paper ran with parameters unsuited to long documents (BM25 has two hyperparameters), which is much of why neural retrieval looked so far ahead of it.
+
+The pair of numbers on the same questions is the thing to take away. If evidence placed in the context answers a question and a search tool in front of the same model does not, the deficit is in the harness. That gap can be measured locally, with no retraining and no model swap; it is the one part of an agent&apos;s retrieval a team fully owns. The baseline finding points the other way, and belongs in any comparison read off a paper. A published win over BM25 is only as strong as that paper&apos;s BM25 configuration, so embeddings beating lexical search can mean embeddings beating a misconfigured baseline. Cheap to check. The configuration is two numbers.</content>
+  </entry>
+  <entry>
+    <title>Introducing System One Models &amp; Jev</title>
+    <id>https://thanoskatsaounis.me/#changed-system-one-models-jev</id>
+    <link rel="alternate" type="text/html" href="https://typesafe.ai/blog/introducing-system-one-models-and-jev"/>
+    <published>2026-09-18T00:00:00.000Z</published>
+    <updated>2026-09-18T00:00:00.000Z</updated>
+    <category term="typesafe.ai"/>
+    <content type="text">TypeSafe&apos;s first System One model, in early access behind a waitlist since 15 September. It gives up string generation. The possible outputs and their structure are fixed in the schema before the call, everything comes back from a single parallel query rather than token by token, and every answer carries a calibrated probability. Input is $0.042 per million tokens with output unmetered, against $0.20-$10 per million input for frontier LLMs; end-to-end latency is 70-500ms against 3-329 seconds. The evidence section is unusually frank about its own limits. The workflow evaluation was written by TypeSafe&apos;s own model capabilities team. The reference answers are the average of GPT-6 Astra&apos;s and Fable 5.1&apos;s predictions, with no ground truth behind them. The LLM comparison figures come from OpenRouter, where harder queries may have been routed to better models. And the 0% type-error rate in the charts is, in TypeSafe&apos;s own words, not empirical: it is entered from the schema guarantee rather than measured.
+
+Scoring against the averaged predictions of two frontier models measures how often it agrees with them. Correctness is a separate question. So the accuracy column and the price column make claims of different kinds. One you can verify this afternoon; the other is parity with two models that were themselves never marked. TypeSafe says so, and adds that the choice probably understates its own result. What survives the caveats is the part that changes code rather than an invoice: a bounded set of questions answered in one pass, each with a number you can put a threshold on. Routing or triage becomes an if-statement with a confidence floor. The usual version is a prompt asking a model to please return JSON, and a try/catch for when it does not.</content>
+  </entry>
+  <entry>
+    <title>Introducing the Life Sciences Verification Program</title>
+    <id>https://thanoskatsaounis.me/#changed-life-sciences-verification-program</id>
+    <link rel="alternate" type="text/html" href="https://www.anthropic.com/news/life-sciences-verification-program"/>
+    <published>2026-09-18T00:00:00.000Z</published>
+    <updated>2026-09-18T00:00:00.000Z</updated>
+    <category term="anthropic.com"/>
+    <content type="text">Verified life-science teams get Mythos, Opus and Sonnet with classifiers more permissive for biology. Two grant types. Standard Use covers an entire team and renews once a year. High-risk Use is per research project, renews every six months, and removes all safeguards that block life-sciences requests. Anthropic is moving these safeguards from real-time blocking at each request to offline monitoring of patterns across requests and sessions, on the reasoning that serious misuse is spread out precisely so the pieces look disconnected. That requires retaining flagged traffic for 30 days. Access is tied to the use cases the organisation declares in its own application. Anthropic monitors traffic against that stated scope and flags anything outside it to the organisation&apos;s admins, who triage within pre-agreed timeframes. Three threat models are named: access compromise, insider threats, and agent misuse, described as agents, especially working in swarms or over long-horizon tasks, taking unintended dangerous actions.
+
+Every team makes this trade the moment an agent touches real systems; here it is put more plainly than usual. A check at each request cannot see a campaign assembled across sessions, so the gate moves from synchronous refusal to asynchronous detection, and the bill arrives as retained logs plus a person who owns the triage. The split of responsibility is the part to copy. Blocking is a control a provider can sell. Deciding what counts as out of scope, and answering when something is, stays with the customer. A platform that offers only the first half has left out the part that needs a name attached to it.</content>
+  </entry>
+  <entry>
+    <title>Detecting and countering misuse of AI: September 2026</title>
+    <id>https://thanoskatsaounis.me/#changed-anthropic-threat-report-sept-2026</id>
+    <link rel="alternate" type="text/html" href="https://www.anthropic.com/threat-intelligence-report-september-2026"/>
+    <published>2026-09-11T00:00:00.000Z</published>
+    <updated>2026-09-11T00:00:00.000Z</updated>
+    <category term="anthropic.com"/>
+    <content type="text">Eight months of disrupted misuse, December 2025 to August 2026, across seven harm areas. Haiku, Sonnet and Opus were the models involved; no case touched Fable or Mythos except one distillation attempt. The shift the report names is from assistance to orchestration. Multi-agent frameworks now run reconnaissance, exploitation and exfiltration, with the human choosing targets and reviewing what comes back. One espionage actor&apos;s agents watched whether their malware had been detected and rebuilt it until it was not; the operator&apos;s main manual task was editing the Claude Code skills that drove the workflow. Separately, several actors compromised the LiteLLM deployments of AI wrapper services, using prompt injection to exfiltrate the production API keys held in their cloud container environments. The report&apos;s conclusion: AI has inverted the cost back onto defenders, and sophistication has stopped being a reliable signal of who is behind an operation.
+
+The LiteLLM cases deserve the closest look, because they make the agent plumbing itself the target. A model gateway holds production keys for several providers, and its whole purpose is to pass untrusted text to a model. That turns prompt injection into an access path to a credential store. Anyone running a proxy to compare models is running that surface. The detection finding points the same way from the other end. A signature pipeline releases on a human cadence and is now racing an automated rebuild loop, so a control that depends on recognising a known artifact has lost the economics it relied on. One that bounds what a compromised component can reach has not.</content>
+  </entry>
+  <entry>
+    <title>GPT-6 Astra vs Claude Fable 5.1: Release Comparison</title>
+    <id>https://thanoskatsaounis.me/#changed-astra-vs-fable-cost-per-task</id>
+    <link rel="alternate" type="text/html" href="https://artificialanalysis.ai/models/releases/comparisons/gpt-6-astra-vs-claude-fable-5-1"/>
+    <published>2026-09-11T00:00:00.000Z</published>
+    <updated>2026-09-11T00:00:00.000Z</updated>
+    <category term="artificialanalysis.ai"/>
+    <content type="text">At their top settings the two tie at 53 on the Intelligence Index v4.3, and both families offer a 1M context window. Fable 5.1 at max effort emits 67 tokens a second against 54 for Astra at max. At low effort, Astra costs $0.82 per index task for a score of 46; Fable costs $2.37 for a score of 47. Blended price per million tokens runs the other way, $7.2 for Fable against $7.7 for Astra. Cost per task is computed from input, cache-hit, cache-write, reasoning and answer token prices.
+
+Cheaper per token and roughly three times the price per task looks like a contradiction until you notice which number the model controls. The price list is fixed. The token count is not, and at low effort one of these spends far more of them to reach the same score. So the bill is set by the effort setting rather than the rate card, which is where the earlier Fable 5.1 pricing entry also ended up, from cache reads and per-client effort defaults. A cost comparison assembled from pricing pages can therefore rank two models backwards. The unit worth measuring is a task trace from your own workload.</content>
+  </entry>
+  <entry>
+    <title>Now everyone can put data to work</title>
+    <id>https://thanoskatsaounis.me/#changed-openai-data-agent</id>
+    <link rel="alternate" type="text/html" href="https://openai.com/index/put-data-to-work/"/>
+    <published>2026-09-11T00:00:00.000Z</published>
+    <updated>2026-09-11T00:00:00.000Z</updated>
+    <category term="openai.com"/>
+    <content type="text">The Data agent in ChatGPT Work, announced 10 September 2026. It connects to Redshift, Datadog, BigQuery, ClickHouse, Databricks, MongoDB and Snowflake, and pulls files from Drive and SharePoint. It reads the organisation&apos;s own metric definitions and data relationships from semantic layers: dbt, Databricks Genie Ontology, Snowflake Horizon and existing BI dashboards. Administrators choose which connections exist and which roles may use them. Queries enforce the connected account&apos;s existing permissions down to table, row and column. It builds and edits dashboards in Power BI, Tableau, Sigma, ThoughtSpot, Omni and Oracle BI, and can send findings to Slack or email. OpenAI says nearly all of its product organisation and over two-thirds of its go-to-market organisation use it internally. Its data team made that possible by creating shared business definitions, setting access rules and adding safeguards for sensitive data.
+
+Read the connector list and the internal-adoption paragraph together and the announcement is describing a prerequisite. The agent reads dbt and Genie Ontology rather than raw tables, and the reason given for it working inside OpenAI is a list of data-governance groundwork. That promotes the semantic layer from documentation, which is how most organisations treat it, to an execution dependency. Without governed definitions the thing guesses at what revenue means, in conversation, at speed. Inheriting the account&apos;s row and column grants has the same shape. It is a good design. It also makes the agent exactly as constrained as a warehouse permission model that was mostly written for analysts who ask one question a week.</content>
+  </entry>
+  <entry>
+    <title>GPT-6 Astra system card: multiturn jailbreaks and prompt injection</title>
+    <id>https://thanoskatsaounis.me/#changed-astra-jailbreak-evals</id>
+    <link rel="alternate" type="text/html" href="https://deploymentsafety.openai.com/gpt-6-astra/multiturn-jailbreak-evaluations"/>
+    <published>2026-09-04T00:00:00.000Z</published>
+    <updated>2026-09-04T00:00:00.000Z</updated>
+    <category term="deploymentsafety.openai.com"/>
+    <content type="text">Two measurements sit next to each other in the system card. The multiturn jailbreak evaluation uses adaptive attackers that probe, read the reply and change tactic across turns, and it scores worst case: for a budget of n attempts, the model counts as succeeding only if it avoids unsafe assistance across all n. Separately, robustness to indirect prompt injection is reported climbing from 96.23% to 99.79%, with instruction-hierarchy robustness at 99.99%.
+
+The metric travels better than the score. Reporting worst case across an attempt budget rather than an average is the difference between a gate and a dashboard, and it is the shape a regression test needs if it is meant to block a merge. The percentage wants the opposite reading. 99.79% is a 1-in-475 failure rate, so an agent making a few thousand tool calls against untrusted content should expect several successful injections per run. At that volume the question stops being the rate. It becomes what a single success can reach, and that is a question about scopes and permissions. The model has little to do with it.</content>
+  </entry>
+  <entry>
+    <title>Agents&apos; next frontier: agent-to-agent and network effects</title>
+    <id>https://thanoskatsaounis.me/#changed-agent-to-agent-network-effects</id>
+    <link rel="alternate" type="text/html" href="https://www.youtube.com/watch?v=REascnFlq_8"/>
+    <published>2026-09-04T00:00:00.000Z</published>
+    <updated>2026-09-04T00:00:00.000Z</updated>
+    <category term="youtube.com"/>
+    <content type="text">A 21-minute talk by Jean-Denis Greze, CTO of Town and previously CTO at Plaid, at AI Engineer. He opens on the network effects of agents working with other agents, then discards the framing. Agent-to-agent, he argues, does not make much sense as a concept. The real problem is search: getting the right private information into an LLM call whose effects land on someone other than the caller. He walks through five strategies teams use, starting with approximate access to everything inside a trust boundary (his example is one agent holding both his and his wife&apos;s mail), and reduces the sharing decision to two options. Ask a human at the moment of sharing, or trust the model with full access and no prompt.
+
+Reframing it as a data question rather than a protocol question moves the design work somewhere useful. A wire format between agents is the easy half. The hard half is which private data crosses a boundary, and who confirms it. It also explains the weight on the ask-a-human option: it is the only point in the flow where the blast radius of a wrong inference is bounded by something other than the model&apos;s judgement.</content>
+  </entry>
+  <entry>
+    <title>Safety overview: GPT-6 Astra</title>
+    <id>https://thanoskatsaounis.me/#changed-gpt-6-astra-safety</id>
+    <link rel="alternate" type="text/html" href="https://openai.com/index/safety-overview-gpt-6-astra/"/>
+    <published>2026-09-04T00:00:00.000Z</published>
+    <updated>2026-09-04T00:00:00.000Z</updated>
+    <category term="openai.com"/>
+    <content type="text">OpenAI&apos;s first model to reach the Critical cybersecurity threshold under its Preparedness Framework. Two findings sit oddly together. Monitorability went down. Astra controls its own chain of thought better than GPT-5.6 Sol, is less likely to put incriminating information in it, and under adversarial instruction can sandbag evaluations and sometimes evade internal monitors. At the same time OpenAI says it has added misalignment monitoring to all tool-using inference in Astra&apos;s external deployment, at significant compute cost, and reports the model is markedly more resistant to prompt injection, with fewer unauthorised transactions, data-loss and excessive-access actions in browsing and workplace tests.
+
+Both findings push the same way. The check is moving out of the model&apos;s reasoning and into the runtime around it, and it is being paid for in compute. That is the argument for putting the gate somewhere you own rather than somewhere you read. A deterministic check does not get less monitorable as the model gets better at hiding its reasoning, and it needs no research programme to stay trustworthy.</content>
+  </entry>
+  <entry>
+    <title>Claude Fable 5.1 and Mythos 5.1</title>
+    <id>https://thanoskatsaounis.me/#changed-fable-5-1</id>
+    <link rel="alternate" type="text/html" href="https://www.anthropic.com/claude-fable-and-mythos-5-1"/>
+    <published>2026-09-04T00:00:00.000Z</published>
+    <updated>2026-09-04T00:00:00.000Z</updated>
+    <category term="anthropic.com"/>
+    <content type="text">One model, two safeguard profiles. Fable 5.1 is generally available; Mythos 5.1 only through trusted access programs for cybersecurity and life sciences. The stated ~25% price drop for typical token-billed workloads comes specifically from cheaper cache reads, and rises to ~45% on highly agentic use. It defaults to High effort in Claude Code and Medium elsewhere.
+
+Both headline numbers describe the caller more than the model. A discount on cache reads only reaches a workload that re-sends a stable prefix. That is why the figure climbs on agentic use: a loop resending a large fixed context every turn is exactly the shape that hits cache. Anything that varies the top of the prompt per call forfeits it, whether an injected timestamp, a reordered context block, or a preamble assembled fresh each time. So the saving is something you reach by editing code, and no amount of comparing list prices gets you there. The effort default splits the same way. One model version answers at High through Claude Code and Medium everywhere else, so an evaluation that does not pin effort is not measuring the configuration anyone is running.</content>
+  </entry>
+  <entry>
+    <title>The Database Nobody Dares Delete</title>
+    <id>https://medium.com/@katsathanasis2/the-database-nobody-dares-delete-c793ac492db9</id>
+    <link rel="alternate" type="text/html" href="https://medium.com/@katsathanasis2/the-database-nobody-dares-delete-c793ac492db9"/>
+    <published>2026-08-23T13:45:36.000Z</published>
+    <updated>2026-08-23T13:45:36.000Z</updated>
+    <category term="Azure"/>
+    <category term="Python"/>
+    <content type="text">Azure shows you every resource you own. It won&apos;t tell you what breaks when one dies, so I built the missing map.</content>
+  </entry>
+  <entry>
+    <title>I Built a Policy Scanner That Fixes My Terraform and Proves the Fix Holds</title>
+    <id>https://medium.com/@katsathanasis2/i-built-a-policy-scanner-that-fixes-my-terraform-and-proves-the-fix-holds-2cb12ac60637</id>
+    <link rel="alternate" type="text/html" href="https://medium.com/@katsathanasis2/i-built-a-policy-scanner-that-fixes-my-terraform-and-proves-the-fix-holds-2cb12ac60637"/>
+    <published>2026-07-24T11:20:00.000Z</published>
+    <updated>2026-07-24T11:20:00.000Z</updated>
+    <category term="OPA / Rego"/>
+    <category term="Terraform"/>
+    <content type="text">A local model explains the misconfiguration, a deterministic engine writes the fix, and the pipeline re-scans to prove zero violations.</content>
+  </entry>
+  <entry>
+    <title>I Built a CI/CD Pipeline That Refuses to Run Code It Can&apos;t Prove It Built</title>
+    <id>https://medium.com/@katsathanasis2/i-built-a-ci-cd-pipeline-that-refuses-to-run-code-it-cant-prove-it-built-e6cc30813524</id>
+    <link rel="alternate" type="text/html" href="https://medium.com/@katsathanasis2/i-built-a-ci-cd-pipeline-that-refuses-to-run-code-it-cant-prove-it-built-e6cc30813524"/>
+    <published>2026-06-29T18:22:37.000Z</published>
+    <updated>2026-06-29T18:22:37.000Z</updated>
+    <category term="Sigstore"/>
+    <category term="Kyverno"/>
+    <content type="text">Signing, SBOMs and admission control, wired so an unsigned image never reaches the cluster.</content>
+  </entry>
+</feed>
